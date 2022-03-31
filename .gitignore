@@ -1,3 +1,6 @@
 # IDE
 *.iml
 .idea
+
+# Apache
+*.htaccess
