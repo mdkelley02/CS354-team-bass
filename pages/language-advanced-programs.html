@@ -35,10 +35,101 @@
   <body>
     <div class="container">
       <h2>Advanced Programs</h2>
+      <h3>Build and Run Instructions</h3>
+      <p>First ensure all dependencies for your platform are installed by following these instructions <a href="https://doc.rust-lang.org/book/ch01-01-installation.html">here.</a></p>
+      <p>Copy below program into a file with .rs extension.</p>
+      <p>From the command line ensure you are in the directory of the copied program and run the following commands:</p>
+      <p>$ rustc your_program_name.rs</p>
+      <p>$ your_program_name.exe</p>
+      <br>
+      <p>Running the below program will output the following:</p>
+      <p>2 added to list</p>
+      <p>3 added to list</p>
+      <p>3 removed from list.</p>
+      <p>4 added to list</p>
+      <p>head:4,2,1:tail</p>
       <pre><code class="language-rust">
-        fn main() {
-            println!("hello world");
+        #[derive(Clone,PartialEq)]
+        struct Node {
+            value: i32,
+            next: Option&#60Box&#60Node>>,
         }
+
+        impl Node {
+            fn new_node(value: i32) -> Node {
+                Node{value: value, next: None}
+            }
+        }
+
+        #[derive(Clone)]
+        struct List {
+            head: Option&#60Box&#60Node>>,
+        }
+
+        impl List {
+            fn new_list() -> List {
+                List{head: None}
+            }
+
+            fn put_on_head(&mut self, value: i32) {
+                let mut new_node: Box&#60Node> = Box::new(Node::new_node(value));
+                match self.head {
+                    Some(ref _node) => {
+                        new_node.next = self.head.clone();
+                        self.head = Some(new_node);
+                    }
+                    None => {
+                        self.head = Some(new_node);
+                        return;
+                    }
+                }
+                println!("{} added to list", value);
+            }
+
+            fn get_from_head(&mut self) -> i32 {
+                match self.head {
+                    Some(ref node) => {
+                        let temp_node = node.clone();
+                        self.head = node.next.clone();
+                        return temp_node.value;
+                    }
+                    None => {
+                        panic!("Cannot get from empty list!");
+
+                    }
+                }
+            }
+
+            fn print_list(self) {
+                match self.head {
+                    Some(ref node) => { 
+                        print!("head:{}", node.value);
+                        let mut temp_node = node;
+                        while temp_node.next != None {
+                            match temp_node.next {
+                                Some(ref next) => {
+                                    print!(",{}", next.value); 
+                                    temp_node = next;
+                                }
+                                None => {}
+                            }
+                        }
+                        println!(":tail"); 
+                    },
+                    None => {println!("Empty List!")}
+                }
+            }
+        }
+
+        fn main() {
+            let mut list = List::new_list();
+            list.put_on_head(1);
+            list.put_on_head(2);
+            list.put_on_head(3);
+            println!("{} removed from list.", list.get_from_head());
+            list.put_on_head(4);
+            list.print_list();
+        } 
       </code></pre>
     </div>
   </body>
