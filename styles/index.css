@@ -13,3 +13,19 @@ html {
 h2 {
   color: goldenrod;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:link {
+  color: royalblue;
+}
+
+a:visited {
+  color: rebeccapurple;
+}
+
+a:hover {
+  color: darkcyan;
+}
