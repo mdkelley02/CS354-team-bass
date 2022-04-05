@@ -10,6 +10,10 @@ html {
   font-size: 24px;
 }
 
+.homepage-list {
+  font-size: 30px;
+}
+
 h2 {
   color: goldenrod;
 }
@@ -28,4 +32,8 @@ a:visited {
 
 a:hover {
   color: darkcyan;
+}
+
+pre {
+  border-radius: 10px;
 }
