@@ -1,10 +1,10 @@
 html {
-  font-family: "Poppins";
+  font-family: "Poppins",sans-serif;
   font-size: 20px;
   margin: 0;
   padding: 0;
 }
 
 .mono {
-  font-family: "Fira Mono";
+  font-family: "Ubuntu Mono",monospace;
 }
