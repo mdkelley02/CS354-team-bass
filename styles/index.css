@@ -44,9 +44,15 @@ div.a {
 
 ul li::before {
   content: "\2022";
-  color: red;
   font-weight: bold;
   display: inline-block; 
   width: 1em;
   margin-left: -1em;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
