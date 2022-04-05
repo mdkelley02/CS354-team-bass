@@ -9,8 +9,8 @@
     <!-- highlight.js theme -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/hybrid.min.css"
-      integrity="sha512-ZVy0y7AnokL/xGtaRaWRgLYjhywJZdJwVFWXW9oihOpDIochH8JF0xWFK+Y1WJ5wTn3rn9LPZRFjxObuzvQUaQ=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/woodland.min.css"
+      integrity="sha512-/ZYuLknSB5wMIvqBWpFUyDTEIfsW+9ySv+qqNyGs7w9UfPi07gQZV4pRsRyWOaN/fmuR8ZS9P/LVPLrVvJOxbw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -34,20 +34,39 @@
 
   <body>
     <div class="container">
-      <h2>Advanced Programs</h2>
-      <h3>Build and Run Instructions</h3>
-      <p>First ensure all dependencies for your platform are installed by following these instructions <a href="https://doc.rust-lang.org/book/ch01-01-installation.html">here.</a></p>
-      <p>Copy below program into a file with .rs extension.</p>
-      <p>From the command line ensure you are in the directory of the copied program and run the following commands:</p>
-      <p>$ rustc your_program_name.rs</p>
-      <p>$ your_program_name.exe</p>
-      <br>
+      <h1>Advanced Programs</h1>
+      <hr>
+
+
+      <h2>Build and Run Instructions (For All Programs)</h2>
+      <ol>
+        <li>Ensure all dependencies for your platform are installed by following these instructions <a href="https://doc.rust-lang.org/book/ch01-01-installation.html">here.</a></li>
+        <li>Copy one of the desired programs below into a file with a .rs extension. For example, <strong>linked_list.rs</strong>.</li>
+        <li>From the command line, ensure you are in the directory of the copied program, then run the following commands:</li>
+      </ol>
+      <p>(Windows)</p>
+      <pre><code class="language-shell">
+        $ rustc your_program_name.rs
+        $ your_program_name.exe
+      </code></pre>
+      <p>(Mac & Linux)</p>
+      <pre><code class="language-shell">
+        $ rustc your_program_name.rs
+        $ ./your_program_name
+      </code></pre>
+      <hr>
+
+
+      <h2>Linked List</h2>
+      <h4><i>(Author: Taylor Brooks)</i></h4>
       <p>Running the below program will output the following:</p>
-      <p>2 added to list</p>
-      <p>3 added to list</p>
-      <p>3 removed from list.</p>
-      <p>4 added to list</p>
-      <p>head:4,2,1:tail</p>
+      <p class="mono">
+        2 added to list<br>
+        3 added to list<br>
+        3 removed from list.<br>
+        4 added to list<br>
+        head:4,2,1:tail
+      </p>
       <pre><code class="language-rust">
         #[derive(Clone,PartialEq)]
         struct Node {
@@ -131,6 +150,166 @@
             list.print_list();
         } 
       </code></pre>
+      <hr>
+
+
+      <h2>Bank (from la2)</h2>
+      <h4><i>(Author: Cory Tomlinson)</i></h4>
+      <p>Running this program will output the following:</p>
+      <p class="mono">
+        01001:Ann:100.00<br>
+        01002:Ann:204.00<br>
+      </p>
+      <pre><code class="language-rust">
+        #![allow(dead_code)]
+
+        use std::fmt::{Display,Formatter,Result};
+
+        // ---------- Customer -------------------------------------------------------------
+
+        pub struct Customer {
+           name:String
+        }
+
+        impl Display for Customer {
+           fn fmt(&self, f:&mut Formatter<'_>) -> Result {
+              write!(f,"{}",self.name)
+           }
+        }
+
+        // ---------- Account --------------------------------------------------------------
+
+        pub enum AccountType {
+           Checking,
+           Saving
+        }
+
+        pub struct Account<'a> {
+           acct_type:AccountType,
+           number:String,
+           customer:&'a Customer,
+           balance:f64,
+           interest:f64
+        }
+
+        impl Account<'_> {
+           fn accrue(&mut self, rate:f64) {
+              match self.acct_type {
+                 AccountType::Checking => {},
+                 AccountType::Saving => {
+                    self.interest += self.balance*rate;
+                    self.balance += self.balance*rate;
+                 }
+              }
+           }
+           fn balance(&self) -> f64 {self.balance}
+           fn deposit(&mut self, amount:f64) {self.balance += amount;}
+           fn withdraw(&mut self, amount:f64) {self.balance -= amount;}
+        }
+
+        impl Display for Account<'_> {
+           fn fmt(&self, f:&mut Formatter<'_>) -> Result {
+              write!(f,"{}:{}:{:.2}",self.number,self.customer,self.balance)
+           }
+        }
+
+        // ---------- Bank -----------------------------------------------------------------
+
+        pub struct Bank<'a> {
+           accounts:Vec<&'a mut Account<'a>>
+        }
+
+        impl<'a> Bank<'a> {
+           fn add(&mut self, account:&'a mut Account<'a>) {
+              self.accounts.push(account);
+           }
+           fn accrue(&mut self, rate:f64) {
+              for account in self.accounts.iter_mut() {
+                 account.accrue(rate);
+              }
+           }
+        }
+
+        impl Display for Bank<'_> {
+           fn fmt(&self, f:&mut Formatter<'_>) -> Result {
+              for account in self.accounts.iter() {
+                 writeln!(f,"{}",account)?;
+              }
+              Ok(())
+           }
+        }
+
+        // ---------- main -----------------------------------------------------------------
+
+        fn main() {
+           let mut bank = Bank {accounts: Vec::new()};
+           let c = Customer {name: String::from("Ann")};
+           let mut account1 = Account {
+              acct_type: AccountType::Checking,
+              number: String::from("01001"),
+              customer: &c,
+              balance: 100.00,
+              interest: 0.0
+           };
+           let mut account2 = Account {
+              acct_type: AccountType::Saving,
+              number: String::from("01002"),
+              customer: &c,
+              balance: 200.00,
+              interest: 0.0
+           };
+           bank.add(&mut account1);
+           bank.add(&mut account2);
+           bank.accrue(0.02);
+           println!("{}",bank);
+        }
+      </code></pre>
+      <hr>
+
+
+      <h2>TBD Example 3</h2>
+      <h4><i>(Author: TBD)</i></h4>
+      <p>TODO</p>
+      <pre><code class="language-rust">
+        fn main() {
+           println!("hello world");
+        }
+      </code></pre>
+      <hr>
+
+
+      <h2>TBD Example 4</h2>
+      <h4><i>(Author: TBD)</i></h4>
+      <p>TODO</p>
+      <pre><code class="language-rust">
+        fn main() {
+           println!("hello world");
+        }
+      </code></pre>
+      <hr>
+
+
+      <h2>TBD Example 5</h2>
+      <h4><i>(Author: TBD)</i></h4>
+      <p>TODO</p>
+      <pre><code class="language-rust">
+        fn main() {
+           println!("hello world");
+        }
+      </code></pre>
+      <hr>
+
+
+      <h2>TBD Example 6</h2>
+      <h4><i>(Author: TBD)</i></h4>
+      <p>TODO</p>
+      <pre><code class="language-rust">
+        fn main() {
+           println!("hello world");
+        }
+      </code></pre>
+      <hr>
+
     </div>
   </body>
 
