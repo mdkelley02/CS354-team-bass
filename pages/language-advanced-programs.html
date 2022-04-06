@@ -170,7 +170,7 @@
 
         use std::fmt::{Display,Formatter,Result};
 
-        // ---------- Customer -------------------------------------------------------------
+        // ---------- Customer ---------------------------------------------------------------------
 
         pub struct Customer {
            name:String
@@ -182,7 +182,7 @@
            }
         }
 
-        // ---------- Account --------------------------------------------------------------
+        // ---------- Account ----------------------------------------------------------------------
 
         pub enum AccountType {
            Checking,
@@ -218,7 +218,7 @@
            }
         }
 
-        // ---------- Bank -----------------------------------------------------------------
+        // ---------- Bank -------------------------------------------------------------------------
 
         pub struct Bank<'a> {
            accounts:Vec<&'a mut Account<'a>>
@@ -244,7 +244,7 @@
            }
         }
 
-        // ---------- main -----------------------------------------------------------------
+        // ---------- main -------------------------------------------------------------------------
 
         fn main() {
            let mut bank = Bank {accounts: Vec::new()};
@@ -294,7 +294,7 @@
         fn main() {
             //Program takes in commandline arguments
             //read, write or regex
-            let args: Vec<String> = env::args().collect();
+            let args: Vec&ltString> = env::args().collect();
             println!("{:?}", args);
             let command = &args[1];
         
@@ -322,7 +322,7 @@
                     for word in line.unwrap().split_whitespace() {
                         println!("word '{}'", word);
                         let mut owned: String = word.to_owned();
-                        owned.push_str(" "); //String concatnation 
+                        owned.push_str(" "); //String concatenation
                         file.write_all(owned.as_bytes()).expect("Cannot write to file");
                     }
                 }
@@ -391,7 +391,6 @@
         }
       </code></pre>
       <hr>
-
     </div>
   </body>
 

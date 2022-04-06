@@ -5,9 +5,14 @@ html {
   padding: 0;
 }
 
+body > .container {
+  min-width: 1400px;
+}
+
 .mono {
   font-family: "Ubuntu Mono",monospace;
   font-size: 24px;
+  color: gray;
 }
 
 .homepage-list {

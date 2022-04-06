@@ -142,17 +142,30 @@
       <hr>
 
 
-      <h2>TBD Example 6</h2>
-      <h4><i>(Author: TBD)</i></h4>
+      <h2>Basic Lambdas and Higher Order Functions</h2>
+      <h4><i>(Author: Cory Tomlinson)</i></h4>
       <p>Running this program will output the following:</p>
       <p class="mono">
-        TBD line1<br>
-        TBD line2<br>
-        TBD etc...<br>
+        5050<br>
+        3628800<br>
       </p>
       <pre><code class="language-rust">
+        use std::ops::{Mul, RangeInclusive};
+
+        fn sum_range(range:RangeInclusive&lti32>)->i32 {
+           range.fold(0,|acc,n| acc+n)
+        }
+
+        fn op_range&ltF>(range:RangeInclusive&lti32>,op:F)->Option&lti32> where F:Fn(i32,i32)->i32 {
+           range.reduce(|acc,n| op(acc,n))
+        }
+
         fn main() {
-           println!("hello world");
+           println!("{}",sum_range(1..=100));
+           println!("{}",match op_range(1..=10,i32::mul) {
+              Some(result) => result,
+              None => panic!("op_range returned an empty value")
+           });
         }
       </code></pre>
       <hr>
