@@ -29,7 +29,32 @@
       <h1>Translators and Installation Instructions</h1>
       <hr>
 
-      <p>TODO</p>
+      <p>To be able to compile Rust source code and develop programs in Rust you need two things.</p>
+      <ul>
+        <li>The Rust Compiler</a></li>
+        <li>A Linker</a></li>
+      </ul>
+      <p>The Rust compiler will generate machine code from the source programs and the linker will join the compiled output into a single file.</p>
+      <p>Follow the instructions below for your specific platform to begin using Rust.</p>
+      <h2>Windows</h2>
+      <p>Download and install the Rust compiler <a href="https://www.rust-lang.org/tools/install">here</a> and install C++ Build Tools from Visual Studio <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">here.</a> </p>
+      <h2>Mac or Linux</h2>
+      <p>Download the Rust compiler by executing the following command. This will download rustup onto your machine.</p>
+      <pre><code class="language-shell">
+        $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+      </code></pre>
+      <p>If you are unsure whether or not you have a linker you can try running a rust program and see if you get linker errors. In the case of linker errors you need to install a C compiler.</p>
+      <p>On Mac you can do this with the following command.</p>
+      <pre><code class="language-shell">
+        $ xcode-select --install
+      </code></pre>
+      <p>On Linux you can do this with the following commands.</p>
+      <pre><code class="language-shell">
+        $ sudo apt-get update
+        $ sudo apt install build-essential
+      </code></pre>
+      
+      <br><p>You can find direct instructions for installing Rust from the Rust documentation <a href="https://doc.rust-lang.org/book/ch01-01-installation.html">here.</a></p><hr>
     </div>
   </body>
 
