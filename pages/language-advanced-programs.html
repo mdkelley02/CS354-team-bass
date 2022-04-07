@@ -272,13 +272,70 @@
       <hr>
 
 
-      <h2>File Management: Read/Write</h2>
+      <h2>File Management: Read/Write/Regex</h2>
       <h4><i>(Author: Senami Hodonu)</i></h4>
       <p>Running this program will output the following:</p>
       <p class="mono">
-        TBD line1<br>
-        TBD line2<br>
-        TBD etc...<br>
+        <strong>Running a package in rust: $ cargo run [optional arguments]</strong><br><br>
+
+        <strong>$ cargo run read</strong><br>
+        Compiling read-write v0.1.0 (C:\file-location)<br>
+        Finished dev [unoptimized + debuginfo] target(s) in 0.63s<br>
+        Running `target\debug\read-write.exe read`<br>
+        ["target\\debug\\read-write.exe", "read"]<br><br>
+        read  option selected<br>
+
+        File Contents:<br>
+
+        Testing the file read-write-regex method calls...<br>
+
+        1 12 123 1234 12345 123456<br><br>
+
+        <strong>$ cargo run write</strong><br>
+        Compiling read-write v0.1.0 (C:\file-location)<br>
+        Finished dev [unoptimized + debuginfo] target(s) in 0.64s<br>
+        Running `target\debug\read-write.exe write`<br>
+        ["target\\debug\\read-write.exe", "write"]<br><br>
+        write  option selected<br>
+
+        word 'Testing'<br>
+        word 'the'<br>
+        word 'file'<br>
+        word 'read-write-regex'<br>
+        word 'method'<br>
+        word 'calls...'<br>
+        word '1'<br>
+        word '12'<br>
+        word '123'<br>
+        word '1234'<br>
+        word '12345'<br>
+        word '123456'<br><br>
+
+        Contents of test-read.txt written to output.txt<br><br>
+
+        <strong>$ cargo run regex</strong><br>
+        Finished dev [unoptimized + debuginfo] target(s) in 0.03s<br>
+        Running `target\debug\read-write.exe regex`<br>
+        ["target\\debug\\read-write.exe", "regex"]<br><br>
+        regex  option selected<br>
+
+        File Contents:<br>
+
+        Testing the file read-write-regex method calls...<br>
+
+        1 12 123 1234 12345 123456<br><br>
+
+        Catching digits with max length of 4 or less:<br>
+
+        "1"<br>
+        "12"<br>
+        "123"<br>
+        "1234"<br>
+        "1234"<br>
+        "5"<br>
+        "1234"<br>
+        "56"<br><br>
+
       </p>
       <pre><code class="language-rust">
         use std::fs::File; //file struct
@@ -294,7 +351,7 @@
         fn main() {
             //Program takes in commandline arguments
             //read, write or regex
-            let args: Vec&ltString> = env::args().collect();
+            let args: Vec<String> = env::args().collect();
             println!("{:?}", args);
             let command = &args[1];
         
@@ -303,37 +360,33 @@
         
             if command.eq("read"){
                 //read from a file
-                let mut file = File::open("src/main.rs").expect("Can't open file!");
+                let mut file = File::open("test-read.txt").expect("Can't open file!");
                 let mut contents = String::new();
                 file.read_to_string(&mut contents).expect("File not available");
                 println!("File Contents:\n\n{}", contents);
-        
-                for cap in Regex::new(r"\d{1,4}").unwrap().find_iter(&contents) {
-                    println!("{:#?}", cap.as_str());
-                }
         
             } else if command.eq("write") {
                 //Writing to a file
                 let mut file = File::create("output.txt").expect("Could not open file");
               
-                let reader = BufReader::new(File::open("test.txt").expect("Cannot open file.txt"));
+                let reader = BufReader::new(File::open("test-read.txt").expect("Cannot open file.txt"));
         
                 for line in reader.lines() {
                     for word in line.unwrap().split_whitespace() {
                         println!("word '{}'", word);
                         let mut owned: String = word.to_owned();
-                        owned.push_str(" "); //String concatenation
+                        owned.push_str(" "); //String concatnation 
                         file.write_all(owned.as_bytes()).expect("Cannot write to file");
                     }
                 }
-        
             } else if command.eq("regex"){
                 //regular expression catching digits with max length of 4
-                let mut file = File::open("src/main.rs").expect("Can't open file!");
+                let mut file = File::open("test-read.txt").expect("Can't open file!");
                 let mut contents = String::new();
                 file.read_to_string(&mut contents).expect("File not available");
                 println!("File Contents:\n\n{}", contents);
         
+                println!("Catching digits with max length of 4 or less:\n");
                 for cap in Regex::new(r"\d{1,4}").unwrap().find_iter(&contents) {
                     //The r in front of our regular expression makes it so that excape sequences are 
                     //not needed!
