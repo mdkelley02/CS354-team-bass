@@ -345,18 +345,54 @@
       <hr>
 
 
-      <h2>TBD Example 4</h2>
-      <h4><i>(Author: TBD)</i></h4>
+      <h2>Sorting: Mergesort Implementation</h2>
+      <h4><i>(Author: Matthew Kelley)</i></h4>
       <p>Running this program will output the following:</p>
       <p class="mono">
-        TBD line1<br>
-        TBD line2<br>
-        TBD etc...<br>
+        <span>1, 2, 3, 4, 5, 6</span>
       </p>
       <pre><code class="language-rust">
-        fn main() {
-           println!("hello world");
-        }
+      fn mergesort(arr: &mut [i32]) {
+          if arr.len() > 1 {
+              let mid = arr.len() / 2;
+              let (left, right) = arr.split_at_mut(mid);
+              mergesort(left);
+              mergesort(right);
+              merge(left, right, arr);
+          }
+      }
+      
+      fn merge(left: &mut [i32], right: &mut [i32], arr: &mut [i32]) {
+          let mut i = 0;
+          let mut j = 0;
+          let mut k = 0;
+          while i < left.len() && j < right.len() {
+              if left[i] <= right[j] {
+                  arr[k] = left[i];
+                  i += 1;
+              } else {
+                  arr[k] = right[j];
+                  j += 1;
+              }
+              k += 1;
+          }
+          while i < left.len() {
+              arr[k] = left[i];
+              i += 1;
+              k += 1;
+          }
+          while j < right.len() {
+              arr[k] = right[j];
+              j += 1;
+              k += 1;
+          }
+      }
+      
+      fn main() {
+          let mut arr = [1, 5, 6, 3, 2, 4];
+          mergesort(&mut arr);
+          println!("{:?}", arr);
+      }
       </code></pre>
       <hr>
 
