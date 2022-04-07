@@ -126,17 +126,42 @@
       <hr>
 
 
-      <h2>TBD Example 5</h2>
-      <h4><i>(Author: TBD)</i></h4>
+      <h2>Basic Struct and Enum</h2>
+      <h4><i>(Author: Taylor Brooks)</i></h4>
       <p>Running this program will output the following:</p>
       <p class="mono">
-        TBD line1<br>
-        TBD line2<br>
-        TBD etc...<br>
+        Student { name: "Joe", grade: B, age: 20, major: "Mechanical Engineering" } <br>
+        Student { name: "Joe", grade: A, age: 20, major: "Mechanical Engineering" }<br>
       </p>
       <pre><code class="language-rust">
+        #[derive(Debug)]
+        enum Grade {
+            A,
+            B,
+            C,
+            D,
+            F,
+        }
+
+        #[derive(Debug)]
+        struct Student {
+            name: &'static str,
+            grade: Grade,
+            age: i32,
+            major: String
+        }
+
+        impl Student {
+            fn changeGrade(&mut self, newGrade: Grade)  {
+                self.grade = newGrade;
+            }
+        }
+
         fn main() {
-           println!("hello world");
+            let mut student = Student {name: "Joe", grade: Grade::B, age: 20, major: "Mechanical Engineering".to_string()  };
+            println!("{:?}", student);
+            student.changeGrade(Grade::A);
+            println!("{:?}", student);
         }
       </code></pre>
       <hr>
