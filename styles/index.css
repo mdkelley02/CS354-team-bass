@@ -61,3 +61,15 @@ ul li::before {
 pre {
   overflow-x: scroll;
 }
+
+pre::-webkit-scrollbar {
+  background-color: #191919;
+  height: 20px;
+  border-radius: 10px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(to right, deepskyblue, mediumaquamarine);
+  -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,.7);
+  border-radius: 15px;
+}
