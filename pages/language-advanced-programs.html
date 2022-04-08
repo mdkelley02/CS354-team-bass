@@ -440,18 +440,45 @@
       <hr>
 
 
-      <h2>TBD Example 5</h2>
-      <h4><i>(Author: TBD)</i></h4>
+      <h2>Sorting: Insertion Sort Implementation</h2>
+      <h4><i>(Author: Brandon Mattaini)</i></h4>
       <p>Running this program will output the following:</p>
       <p class="mono">
-        TBD line1<br>
-        TBD line2<br>
-        TBD etc...<br>
+Sort strings alphabetically
+Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]
+After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br>
+Sort numbers in ascending order
+Before: [43, 65, 23, 78, 4, -30, 12, 89, 3335, 60]
+After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
+        
       </p>
       <pre><code class="language-rust">
         fn main() {
-           println!("hello world");
-        }
+
+          println!("Sort strings alphabetically");
+          let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
+          println!("Before: {:?}", strings); 
+          insertion_sort(&mut strings); // calling the insertion sort function
+          println!("After:  {:?}\n", strings);
+          println!("Sort numbers ascending");
+          let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
+          println!("Before: {:?}", nums);  // inserting the entrie array here with {:?}
+          insertion_sort(&mut nums);
+          println!("After:  {:?}\n", nums);
+          
+      }
+      
+      fn insertion_sort<T: Ord>(arr: &mut [T]) {
+          for i in 1..arr.len() {
+              let mut k = i;
+              while k > 0 && arr[k] < arr[k - 1] {
+                  arr.swap(k, k - 1);
+                  k = k - 1;
+              }
+          }
+      }
+      
+      
       </code></pre>
       <hr>
 
