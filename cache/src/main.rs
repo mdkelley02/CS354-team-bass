@@ -12,9 +12,9 @@ fn main() {
 
     //argument variables
     let mut use_2lvl_cache;
-    let mut cache1_capacity = 0;
-    let mut cache2_capacity = 0;
-    let mut filepath = String::new();
+    let mut cache1_capacity;
+    let mut cache2_capacity;
+    let mut filepath;
 
     //test metric variables
     let mut num_refs1 = 0;
@@ -49,9 +49,7 @@ fn main() {
             cache2_capacity = args[3].parse::<u32>().unwrap_or_else(|ignored| print_usage_and_exit("Field 3 must be a positive integer"));
             filepath = args[3].clone();
         },
-        _ => {
-            print_usage_and_exit("Field 1 must be a 1 or 2");
-        }
+        _ => {print_usage_and_exit("Field 1 must be a 1 or 2");}
     }
 
     //display total run time
@@ -63,10 +61,10 @@ fn print_usage_and_exit(message:&str) -> u32 {
     print!("{}\n{}", Red.paint(message), indoc! {"
 
         Usage:
-            cargo run 1 <cache_size> <input_textfile_name>
+            cargo run 1 <1st-level_cache_size> <input_textfile_name>
             cargo run 2 <1st-level_cache_size> <2nd-level_cache_size> <input_textfile_name>
 
     "});
     process::exit(1);
-    0
+    0 //returns value for use in error handling functions requiring a Result::Err value
 }
