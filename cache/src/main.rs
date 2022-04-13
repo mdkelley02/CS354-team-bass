@@ -1,6 +1,9 @@
 pub mod cache;
 
+use ansi_term::Color::*;
+use indoc::indoc;
 use std::env;
+use std::process;
 use std::time::Instant;
 
 fn main() {
@@ -16,9 +19,23 @@ fn main() {
     println!();
 
     //validate args
-    
+    if !(4..=5).contains(&(args.len() as i32)) {
+        eprintln!("{}",Red.paint("Incorrect number of arguments provided"));
+        print_usage_and_exit();
+    }
 
     //display total run time
     let elapsed = start.elapsed();
     println!("Program execution took {}.{} seconds", elapsed.as_secs(), elapsed.subsec_millis());
+}
+
+fn print_usage_and_exit() {
+    print!("{}",indoc! {"
+
+        Usage:
+            cargo run 1 <cache_size> <input_textfile_name>
+            cargo run 2 <1st-level_cache_size> <2nd-level_cache_size> <input_textfile_name>
+
+    "});
+    process::exit(1);
 }
