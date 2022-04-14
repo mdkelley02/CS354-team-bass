@@ -4,17 +4,20 @@ pub mod cache;
 
 use ansi_term::Color::*;
 use indoc::indoc;
-use std::{env, process, time::Instant};
+use std::env;
+use std::process;
+use std::time::Instant;
+
 
 fn main() {
     //begin timing program execution
     let start = Instant::now();
 
     //argument variables
-    let mut use_2lvl_cache;
-    let mut cache1_capacity;
-    let mut cache2_capacity;
-    let mut filepath;
+    let mut use_2lvl_cache = false;
+    let mut cache1_capacity = 0;
+    let mut cache2_capacity = 0;
+    let mut filepath = String::new();
 
     //test metric variables
     let mut num_refs1 = 0;
@@ -30,15 +33,15 @@ fn main() {
     let args:Vec<String> = env::args().collect();
     println!("You entered:");
     for (i,arg) in args.iter().enumerate() {
-        println!("\tfield {}: {}", i, arg);
+        println!("\tfield {}: {}",i,arg);
     }
     println!();
 
     //process args
-    if !(4..=5).contains(&(args.len() as i32)) {
+    if !(4<=args.len() && args.len()<=5) {
         print_usage_and_exit("Incorrect number of arguments provided");
     }
-    cache1_capacity = args[2].parse::<u32>().unwrap_or_else(|ignored| print_usage_and_exit("Field 2 must be a positive integer"));
+    cache1_capacity = args[2].parse::<u32>().unwrap_or_else(|ignored| {print_usage_and_exit("Field 2 must be a positive integer"); 0});
     match args[1].as_str() {
         "1" => {
             use_2lvl_cache = false;
@@ -46,7 +49,7 @@ fn main() {
         },
         "2" => {
             use_2lvl_cache = true;
-            cache2_capacity = args[3].parse::<u32>().unwrap_or_else(|ignored| print_usage_and_exit("Field 3 must be a positive integer"));
+            cache2_capacity = args[3].parse::<u32>().unwrap_or_else(|ignored| {print_usage_and_exit("Field 3 must be a positive integer"); 0});
             filepath = args[3].clone();
         },
         _ => {print_usage_and_exit("Field 1 must be a 1 or 2");}
@@ -57,8 +60,9 @@ fn main() {
     println!("Program execution took {}.{:0<3} seconds", elapsed.as_secs(), elapsed.subsec_millis());
 }
 
-fn print_usage_and_exit(message:&str) -> u32 {
-    print!("{}\n{}", Red.paint(message), indoc! {"
+
+fn print_usage_and_exit(message:&str) {
+    print!("{}\n{}", Red.paint(message), indoc!{"
 
         Usage:
             cargo run 1 <1st-level_cache_size> <input_textfile_name>
@@ -66,5 +70,4 @@ fn print_usage_and_exit(message:&str) -> u32 {
 
     "});
     process::exit(1);
-    0 //returns value for use in error handling functions requiring a Result::Err value
 }
