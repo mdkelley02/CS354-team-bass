@@ -78,18 +78,52 @@
       <hr>
 
 
-      <h2>TBD Example 2</h2>
-      <h4><i>(Author: TBD)</i></h4>
+      <h2>Testing Example</h2>
+      <h4><i>(Author: Xavier Black)</i></h4>
       <p>Running this program will output the following:</p>
       <p class="mono">
-        TBD line1<br>
-        TBD line2<br>
-        TBD etc...<br>
+        This test fails thread 'tests::failure' panicked at 'This test fails'<br>
+        assertion failed: f thread 'tests::false_assertion' panicked at 'assertion failed: f'<br>
+        Test ignored.<br>
       </p>
       <pre><code class="language-rust">
-        fn main() {
-           println!("hello world");
-        }
+      #[cfg(test)]
+        mod tests {
+          //Unit testing is built into the language and can be started with #[cfg(test)], a mod tests and the #[test] for each test
+          #[test]
+           fn it_works() {
+            let result = 2 + 2;
+            assert_eq!(result, 4);
+          }
+          //Tests fail if put into panic
+          #[test]
+          fn failure() {
+            panic!("This test fails");
+          }
+          //Different ways to have a test pass similar to jUnit testing.
+          #[test]
+          fn asserting() {
+            let t = true;
+            assert!(t);
+          }
+          #[test]
+          fn false_assertion() {
+            let f = false;
+            assert!(f);
+          }
+          //Can disable a test with #[ignore] with a message about why it is being ignored
+          #[test]
+          #[ignore = "Not done yet"]
+          fn too_lazy() {
+            panic!("This doesn't matter");
+          }
+          //Pass if a error should be thrown and can have it match specific error messages
+          #[test]
+          #[should_panic = "Fire!"]
+          fn dumpster_fire() {
+            assert_ne!(2,2,"Fire!")
+          }
+        }  
       </code></pre>
       <hr>
 
