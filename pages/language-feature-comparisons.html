@@ -44,7 +44,6 @@
       safe code.</p>
       <p>In languages like C++ and C where pointer arithmatic and memory management are usually required, Rust is able
       to ignore those requirements and operate with safe and unsafe code.</p>
-      <br><hr>
       <h2>Safe and Unsafe Code</h2>
       <p>In safe code, every given object has the exact amount of memory needed and it is promised to be allocated for that
       object.</p>
@@ -61,6 +60,17 @@
       It will not allow you to compile if there are any errors in the code. It will not compile if you have a null pointer. This is a little frustrating 
       and makes it so that development and prototyping, especially for newcomers, is a lot of error messages. It does not give you the rope to hang yourself 
       that is available in C and C++.</p>
+      <h2>Ownership</h2>
+      <p>Rust ensures memory safety through a model known as Ownership. This is a memory management model unlike most programming languages that use 
+        garbage collection (Java) or manual memory management (C). Rust checks during compliation that the program does not break any of the 3 following rules. 
+        If a rule is broken the program will not compile.</p>
+        <ul>
+          <li>Each value has a variable called its owner.</li>
+          <li>For each value there can only be one owner at a time.</li>
+          <li>When the owner goes out of scope, the value is dropped (the memory is freed).</li>
+        </ul>
+        <p>This is where Rust's borrow system comes into play. Variables are constantly 'borrowed' throughout the program by passing references to variables.
+          Unlike C, references in Rust are guaranteed to point to valid objects.</p>
       <h2>Rusts Static Typing</h2>
       <p>Rust has the feature of type inference for it's statically-typed system; however, unlike other statically-typed languages it does not allow for the 
       Null type. However, the type inference has some limited circumstances in requiring top-level items like function arguments and constants be explicitly typed.</p>
@@ -71,7 +81,7 @@
       <p>Rust gives you the choice of storing data on the stack or on the heap and determines at compile time when memory is no longer needed and can be cleaned up. This allows efficient usage of memory as well as more performant memory access.</p>
       <p>Without the need to have a garbage collector continuously running, Rust projects are well-suited to be used as libraries by other programming languages via foreign-function interfaces. This allows existing projects to replace performance-critical pieces with speedy Rust code without the memory safety risks present with other systems programming languages.</p>
       <p>With direct access to hardware and memory, Rust is an ideal language for embedded and hardware level development.</p>
-      
+      <br><hr>
     </div>
   </body>
 
