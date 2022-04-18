@@ -57,16 +57,20 @@
       <p>This is where Rust comes into play. Rust is able to let the user write unsafe code and convert it to safe code.
       This makes the overall experience of the language much easier to learn because the avoidance of many errors that
       would be present in other languages. </p>
-      <p>The main goal of Rust is to allow for efficient, fast, and memory safe systems. </p>
       <p>Rust is very serious about enforcing its strong type system and memory safety, although not being a grabage collecting language like Java or Go.
       It will not allow you to compile if there are any errors in the code. It will not compile if you have a null pointer. This is a little frustrating 
       and makes it so that development and prototyping, especially for newcomers, is a lot of error messages. It does not give you the rope to hang yourself 
       that is available in C and C++.</p>
+      <h2>Rusts Static Typing</h2>
       <p>Rust also has the feature of type inference for it's statically-typed system; however, unlike other statically-typed languages it does not allow for the 
       Null type. However, the type inference has some limited circumstances in requiring top-level items like function arguments and constants be explicitly typed.</p>
       <p>Rust concurrent programming is another aspect that puts safety first. One of the problems with multi-threading is the threat of data races. Rust solves this
       by locking objects to only one thread at a time it ensures operations on the object will not break, unlike Go that solves the issue by syncronization and 
       message passing. </p>
+      <h2>Garbage Collectin</h2>
+      <p>Rust gives you the choice of storing data on the stack or on the heap and determines at compile time when memory is no longer needed and can be cleaned up. This allows efficient usage of memory as well as more performant memory access.</p>
+      <p>Without the need to have a garbage collector continuously running, Rust projects are well-suited to be used as libraries by other programming languages via foreign-function interfaces. This allows existing projects to replace performance-critical pieces with speedy Rust code without the memory safety risks present with other systems programming languages.</p>
+      <p>With direct access to hardware and memory, Rust is an ideal language for embedded and bare-metal development.</p>
       
     </div>
   </body>
