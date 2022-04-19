@@ -4,7 +4,9 @@ html {
   margin: 0;
   padding: 0;
 }
-
+body {
+  margin: 0;
+}
 .mono {
   font-family: "Ubuntu Mono",monospace;
   font-size: 24px;
@@ -72,4 +74,23 @@ pre::-webkit-scrollbar-thumb {
   background-image: linear-gradient(to right, deepskyblue, mediumaquamarine);
   -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,.7);
   border-radius: 15px;
+}
+
+.header-container {
+  background-color: #191919;
+}
+.header-list {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.header-list a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.header-list a:hover {
+  color: goldenrod;
 }
