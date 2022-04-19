@@ -89,10 +89,18 @@
         $ ./your_program_name
       </code></pre>
       <hr>
-      <h2>Sorting: Insertion Sort Implementation</h2>
+
+
+      <h2>Insertion Sort</h2>
       <h4><i>(Author: Brandon Mattaini)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>for loop with range</li>
+        <li>lack of parentheses in conditions</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
+
 Sort strings alphabetically:<br>
 Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]<br>
 After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br>
@@ -151,62 +159,78 @@ After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
             }
         }
     }
-      
-      
+    
       </code></pre>
       <hr>
-      <h2>Sorting: Mergesort Implementation</h2>
+
+
+      <h2>Mergesort</h2>
       <h4><i>(Author: Matthew Kelley)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>more tuple type use</li>
+        <li>lack of increment operator</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
         <span>1, 2, 3, 4, 5, 6</span>
       </p>
       <pre><code class="language-rust">
-      fn mergesort(arr: &mut [i32]) {
-          if arr.len() > 1 {
-              let mid = arr.len() / 2;
-              let (left, right) = arr.split_at_mut(mid);
-              mergesort(left);
-              mergesort(right);
-              merge(left, right, arr);
-          }
-      }
+        fn mergesort(arr: &mut [i32]) {
+            if arr.len() > 1 {
+                let mid = arr.len() / 2;
+                let (left, right) = arr.split_at_mut(mid);
+                mergesort(left);
+                mergesort(right);
+                merge(left, right, arr);
+            }
+        }
+
+        fn merge(left: &mut [i32], right: &mut [i32], arr: &mut [i32]) {
+            let mut i = 0;
+            let mut j = 0;
+            let mut k = 0;
+            while i < left.len() && j < right.len() {
+                if left[i] <= right[j] {
+                    arr[k] = left[i];
+                    i += 1;
+                } else {
+                    arr[k] = right[j];
+                    j += 1;
+                }
+                k += 1;
+            }
+            while i < left.len() {
+                arr[k] = left[i];
+                i += 1;
+                k += 1;
+            }
+            while j < right.len() {
+                arr[k] = right[j];
+                j += 1;
+                k += 1;
+            }
+        }
       
-      fn merge(left: &mut [i32], right: &mut [i32], arr: &mut [i32]) {
-          let mut i = 0;
-          let mut j = 0;
-          let mut k = 0;
-          while i < left.len() && j < right.len() {
-              if left[i] <= right[j] {
-                  arr[k] = left[i];
-                  i += 1;
-              } else {
-                  arr[k] = right[j];
-                  j += 1;
-              }
-              k += 1;
-          }
-          while i < left.len() {
-              arr[k] = left[i];
-              i += 1;
-              k += 1;
-          }
-          while j < right.len() {
-              arr[k] = right[j];
-              j += 1;
-              k += 1;
-          }
-      }
-      
-      fn main() {
-          let mut arr = [1, 5, 6, 3, 2, 4];
-          mergesort(&mut arr);
-          println!("{:?}", arr);
-      }
+        fn main() {
+            let mut arr = [1, 5, 6, 3, 2, 4];
+            mergesort(&mut arr);
+            println!("{:?}", arr);
+        }
       </code></pre>
       <hr>
+
+
       <h2>Bank (from la2)</h2>
       <h4><i>(Author: Cory Tomlinson)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>lifetimes/borrowing</li>
+        <li>lack of inheritance & different approach to OO</li>
+        <li>traits</li>
+        <li>? operator</li>
+        <li>return without return statement</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
         01001:Ann:100.00<br>
@@ -317,8 +341,15 @@ After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
         }
       </code></pre>
       <hr>
+
+
       <h2>Linked List</h2>
       <h4><i>(Author: Taylor Brooks)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>smart pointers/Box/recursive types</li>
+        <li>trait derivation</li>
+      </ul>
       <p>Running the below program will output the following:</p>
       <p class="mono">
         2 added to list<br>
@@ -412,8 +443,15 @@ After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
       </code></pre>
       <hr>
 
-      <h2>File Management: Read/Write/Regex</h2>
+      <h2>File IO: Read/Write/Regex</h2>
       <h4><i>(Author: Senami Hodonu)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>expect</li>
+        <li>unwrap</li>
+        <li>&str vs String</li>
+        <li>file operations</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
         <strong>Running a package in rust: $ cargo run [optional arguments]</strong><br><br>
@@ -465,7 +503,6 @@ After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
         "5"<br>
         "1234"<br>
         "56"<br><br>
-
       </p>
       <pre><code class="language-rust">
         use std::fs::File; //file struct
@@ -481,7 +518,7 @@ After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
         fn main() {
             //Program takes in commandline arguments
             //read, write or regex
-            let args: Vec<String> = env::args().collect();
+            let args: Vec&ltString> = env::args().collect();
             println!("{:?}", args);
             let command = &args[1];
         
@@ -529,6 +566,10 @@ After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
 
       <h2>Macro TT Muncher Parser</h2>
       <h4><i>(Author: Xavier Black)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>custom macros</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
         m = 30<br>
@@ -547,57 +588,57 @@ After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
       </p>
       <pre><code class="language-rust">
         use std::io;
-        //TT Muncher for a simple grammar. Can be indefinitely long as it is recursive but macros do have a limit
-        //on recursion as there is no form of tail recursion elimination.
+        //TT Muncher for a simple grammar. Can be indefinitely long as it is recursive but macros
+        //do have a limit on recursion as there is no form of tail recursion elimination.
         macro_rules! grammar {
-          () => {};
-          (wr $name:ident; $($tail:tt)*) => {
-            {
-              println!(concat!(stringify!($name), " = {:}"), $name);
-              grammar!($($tail)*);
-            }
-          };
-          ($name:ident = $init:expr; $($tail:tt)*) => {
-            {
-              $name = $init;
-              println!(concat!(stringify!($name), " = {:}"), $name);
-              grammar!($($tail)*);
-            }
-          };
-          (rd $name:ident; $($tail:tt)*) => {
-            {
-              let mut x = String::with_capacity(100);
-              println!(concat!("Enter value for ", stringify!($name),":"));
-              io::stdin().read_line(&mut x).expect("Error reading input");
-              $name = x;
-              println!(concat!(stringify!($name), " = {:}"), $name);
-              grammar!($($tail)*);
-            }
-          };
-          (comp $expr1:expr; $expr2:expr; $($tail:tt)*) => {
-            {
-              let x = ($expr1 == $expr2);
-              if x {
-                println!("Expressions {0} and {1} are equal", $expr1, $expr2);
-              } else {
-                println!("Expressions {0} and {1} are not equal", $expr1, $expr2);
+           () => {};
+           (wr $name:ident; $($tail:tt)*) => {
+              {
+                 println!(concat!(stringify!($name), " = {:}"), $name);
+                 grammar!($($tail)*);
               }
-              grammar!($($tail)*);
-            }
-          };
+           };
+           ($name:ident = $init:expr; $($tail:tt)*) => {
+              {
+                 $name = $init;
+                 println!(concat!(stringify!($name), " = {:}"), $name);
+                 grammar!($($tail)*);
+              }
+           };
+           (rd $name:ident; $($tail:tt)*) => {
+              {
+                 let mut x = String::with_capacity(100);
+                 println!(concat!("Enter value for ", stringify!($name),":"));
+                 io::stdin().read_line(&mut x).expect("Error reading input");
+                 $name = x;
+                 println!(concat!(stringify!($name), " = {:}"), $name);
+                 grammar!($($tail)*);
+              }
+           };
+           (comp $expr1:expr; $expr2:expr; $($tail:tt)*) => {
+              {
+                 let x = ($expr1 == $expr2);
+                 if x {
+                    println!("Expressions {0} and {1} are equal", $expr1, $expr2);
+                 } else {
+                    println!("Expressions {0} and {1} are not equal", $expr1, $expr2);
+                 }
+                 grammar!($($tail)*);
+              }
+           };
         }
-      // Shows different snippets of code that can be parsed by the macro.
-      fn main() {
-        let mut m= 1;
-        let mut ill = "s";
-        let mut x;
-        let mut s;
-        grammar!(m = 24+6; ill = "Written variables are cool";);
-        grammar!(comp 24+6;19*2/21;comp 24+6; m;);
-        grammar!(rd s; rd x; comp x; s;);
-        grammar!(s = x;);
-        grammar!(wr ill; wr m; wr s;)
-      }
+        // Shows different snippets of code that can be parsed by the macro.
+        fn main() {
+           let mut m= 1;
+           let mut ill = "s";
+           let mut x;
+           let mut s;
+           grammar!(m = 24+6; ill = "Written variables are cool";);
+           grammar!(comp 24+6;19*2/21;comp 24+6; m;);
+           grammar!(rd s; rd x; comp x; s;);
+           grammar!(s = x;);
+           grammar!(wr ill; wr m; wr s;)
+        }
       </code></pre>
       <hr>
     </div>
