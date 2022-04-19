@@ -38,6 +38,9 @@
             <a href="language-history.html">History</a>
           </div>
           <div>
+            <a href="language-feature-comparisons.html">Feature Comparisons</a>
+          </div>
+          <div>
             <a href="language-specs.html">Specs</a>
           </div>
           <div>
@@ -48,9 +51,6 @@
           </div>
           <div>
             <a href="language-advanced-programs.html">Advanced Programs</a>
-          </div>
-          <div>
-            <a href="language-feature-comparisons.html">Feature Comparisons</a>
           </div>
         </div>
       </div>
@@ -64,72 +64,41 @@
 
       <h2>What is Rust and how does it compare to other languages?</h2>
       <p>
-        Well it is first important to note that Rust is a general purpose
-        langauge, low level, and is best suited for systems, and other
+        Well, it is first important to note that Rust is a general purpose
+        langauge, low level, and is best suited for systems and other
         performance critical code.
       </p>
       <p>
         The largest and most noticeable difference between Rust and object
-        oriented languages like C++ is the focus on safe code.
+        oriented languages like C++ is the focus on safe code, especially
+        memory safety and safe concurrency.
       </p>
       <p>
         In languages like C++ and C where pointer arithmatic and memory
         management are usually required, Rust is able to ignore those
         requirements and operate with safe and unsafe code.
       </p>
-      <h2>Convenient Tool Chain: cargo</h2>
-      <p>
-        Although you can use <code class="inline-code">rustc</code> to compile
-        your Rust program into a native binary. Rust developers seldom use this
-        future and instead opt to use the built-in package manager cargo. Cargo
-        is Rust's build tool, dependency manager, test-runner, and project
-        bootstrapper.
-      </p>
-      <p>Creating a new project with cargo.</p>
-      <pre><code class="language-console">
-        $ cargo new my-new-project
-      </code></pre>
-      <p>This will create a new project in the current directory</p>
-      <pre><code class="language-console">
-        $ ls
-        Cargo.lock
-        Cargo.toml
-        src
-        src/main.rs
-        src/lib.rs
-      </code></pre>
-      <p>Running your project with cargo</p>
-      <pre><code class="language-console">
-        $ cargo run
-        Hello, world!
-      </code></pre>
-      <p>Running your tests with cargo</p>
-      <pre><code class="language-console">
-        $ cargo test
-      </code></pre>
       <h2>Safe and Unsafe Code</h2>
       <p>
-        In safe code, every given object has the exact amount of memory needed
+        In <em>safe code</em>, every given object has the exact amount of memory needed
         and it is promised to be allocated for that object.
       </p>
       <p>
-        When a user trys to access an object, it is impossible to incorrectly
-        access a memory location out of bounds. And when the process is done,
-        the object is then automatically deallocated so the user does not have
+        When a user tries to access an object, it is impossible to incorrectly
+        access a memory location out of bounds. Then, when the process is done,
+        the object is automatically deallocated so the user does not have
         to manually free the object themselves.
       </p>
       <p>
-        In unmanaged code, it is harder to write correct code but it also open
-        up room for more bugs and errors to be present such as buffer overflows.
+        In <em>unmanaged/unsafe code</em>, it is harder to write correct code, but it also opens
+        up room for more bugs and errors to be present, such as buffer overflows.
       </p>
       <p>
         While unmanaged/unsafe code is dangerous, it also can be incredibly fast
-        in terms of operation performance.
-      </p>
-      <p>
-        This is where Rust comes into play. Rust is able to let the user write
+        in terms of performance.
+        This is where Rust's features really shine. Rust is able to let the user write
         unsafe code and convert it to safe code. This makes the overall
-        experience of the language much easier to learn because the avoidance of
+        experience of the language much easier to learn due to the avoidance of
         many errors that would be present in other languages.
       </p>
       <p>
@@ -141,44 +110,7 @@
         especially for newcomers, is a lot of error messages. It does not give
         you the rope to hang yourself that is available in C and C++.
       </p>
-      <h2>Ownership</h2>
-      <p>
-        Rust ensures memory safety through a model known as Ownership. This is a
-        memory management model unlike most programming languages that use
-        garbage collection (Java) or manual memory management (C). Rust checks
-        during compliation that the program does not break any of the 3
-        following rules. If a rule is broken the program will not compile.
-      </p>
-      <ul>
-        <li>Each value has a variable called its owner.</li>
-        <li>For each value there can only be one owner at a time.</li>
-        <li>
-          When the owner goes out of scope, the value is dropped (the memory is
-          freed).
-        </li>
-      </ul>
-      <p>
-        This is where Rust's borrow system comes into play. Variables are
-        constantly 'borrowed' throughout the program by passing references to
-        variables. Unlike C, references in Rust are guaranteed to point to valid
-        objects.
-      </p>
-      <h2>Rusts Static Typing</h2>
-      <p>
-        Rust has the feature of type inference for it's statically-typed system;
-        however, unlike other statically-typed languages it does not allow for
-        the Null type. However, the type inference has some limited
-        circumstances in requiring top-level items like function arguments and
-        constants be explicitly typed.
-      </p>
-      <p>
-        Rust's concurrent programming is another aspect that puts safety first.
-        One of the problems with multi-threading is the threat of data races.
-        Rust solves this by locking objects to only one thread at a time it
-        ensures operations on the object will not break, unlike Go that solves
-        the issue by synchronization and message passing.
-      </p>
-      <h2>No Garbage Collecting?</h2>
+      <h2>No Garbage Collector</h2>
       <p>
         Rust gives you the choice of storing data on the stack or on the heap
         and determines at compile time when memory is no longer needed and can
@@ -196,6 +128,70 @@
         With direct access to hardware and memory, Rust is an ideal language for
         embedded and hardware level development.
       </p>
+      <h2>Ownership</h2>
+      <p>
+        Rust ensures memory safety through a model known as Ownership. This is a
+        memory management model unlike most programming languages that use
+        garbage collection (Java) or manual memory management (C). Rust checks
+        during compliation that the program does not break any of the 3
+        following rules. If a rule is broken the program will not compile.
+      </p>
+      <ul>
+        <li>Each value has a variable called its <em>owner</em>.</li>
+        <li>For each value there can only be <em>one</em> owner at a time.</li>
+        <li>When the owner goes out of scope, the value is <em>dropped</em> (the memory is freed).</li>
+      </ul>
+      <p>
+        This is where Rust's borrow system comes into play. Variables are
+        constantly 'borrowed' throughout the program by passing references to
+        variables. Unlike C, references in Rust are guaranteed to point to valid
+        objects.
+      </p>
+      <h2>Static Typing</h2>
+      <p>
+        Rust also has the feature of type inference for it's statically-typed system;
+        however, unlike other statically-typed languages it does not allow for
+        the Null type. While it is otherwise very flexible, Rust's type inference is
+        deliberately limited in some cases such as top-level items like function arguments and
+        constants, which need to be explicitly typed.
+      </p>
+      <p>
+        Rust's concurrent programming is another aspect that puts safety first.
+        One of the problems with multi-threading is the threat of data races.
+        Rust solves this by locking objects to only one thread at a time it
+        ensures operations on the object will not break, unlike Go that solves
+        the issue by synchronization and message passing.
+      </p>
+      <h2>Convenient Tool Chain: Cargo</h2>
+      <p>
+        Although you can use <code class="inline-code">rustc</code> to compile
+        your Rust program into a native binary. Rust developers seldom use this
+        future and instead opt to use the built-in package manager cargo. Cargo
+        is Rust's build tool, dependency manager, test-runner, and project
+        bootstrapper.
+      </p>
+      <p>Creating a new project with cargo:</p>
+      <pre><code class="language-console">
+        $ cargo new my-new-project
+      </code></pre>
+      <p>This will create a new project in the current directory with the following layout</p>
+      <pre><code class="language-console">
+        $ ls
+        Cargo.lock
+        Cargo.toml
+        src
+        src/main.rs
+        src/lib.rs
+      </code></pre>
+      <p>Running your project with cargo:</p>
+      <pre><code class="language-console">
+        $ cargo run
+        Hello, world!
+      </code></pre>
+      <p>Running your tests with cargo:</p>
+      <pre><code class="language-console">
+        $ cargo test
+      </code></pre>
       <br />
       <hr />
     </div>

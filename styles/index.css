@@ -7,10 +7,23 @@ html {
 body {
   margin: 0;
 }
+
+body > .container {
+  min-width: 1400px;
+}
+
 .mono {
   font-family: "Ubuntu Mono",monospace;
   font-size: 24px;
   color: gray;
+}
+
+strong {
+  font-family: "Fira Sans ExtraBold";
+}
+
+em {
+  font-weight: bolder;
 }
 
 .homepage-list {
@@ -34,7 +47,7 @@ a:visited {
 }
 
 a:hover {
-  color: darkcyan;
+  color: goldenrod;
 }
 
 pre {
@@ -97,6 +110,7 @@ pre::-webkit-scrollbar-thumb {
 
 .inline-code {
   background-color: #171c19;
+  border-radius: 9px;
   color: #87928a;
   padding: 0.25rem 0.25rem;
   font-family: monospace;
