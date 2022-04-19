@@ -71,10 +71,10 @@
       <p>
         The largest and most noticeable difference between Rust and object
         oriented languages like C++ is the focus on safe code, especially
-        memory safety and safe concurrency.
+        memory safety.
       </p>
       <p>
-        In languages like C++ and C where pointer arithmatic and memory
+        In languages like C where pointer arithmatic and memory
         management are usually required, Rust is able to ignore those
         requirements and operate with safe and unsafe code.
       </p>
@@ -84,7 +84,7 @@
         and it is promised to be allocated for that object.
       </p>
       <p>
-        When a user tries to access an object, it is impossible to incorrectly
+        When someone tries to access an object, it is impossible to incorrectly
         access a memory location out of bounds. Then, when the process is done,
         the object is automatically deallocated so the user does not have
         to manually free the object themselves.
@@ -96,8 +96,9 @@
       <p>
         While unmanaged/unsafe code is dangerous, it also can be incredibly fast
         in terms of performance.
-        This is where Rust's features really shine. Rust is able to let the user write
-        unsafe code and convert it to safe code. This makes the overall
+        This is where Rust's features stand out. Rust is able to let the user write
+        safe code and unsafe code when needed. Using the keyword 'unsafe' lowers almost all restrictions
+        making it possible to also call unsafe functions. This makes the overall
         experience of the language much easier to learn due to the avoidance of
         many errors that would be present in other languages.
       </p>
@@ -119,9 +120,9 @@
       </p>
       <p>
         Without the need to have a garbage collector continuously running, Rust
-        projects are well-suited to be used as libraries by other programming
-        languages via foreign-function interfaces. This allows existing projects
-        to replace performance-critical pieces with speedy Rust code without the
+        projects are optimized to be used as libraries by other programming
+        languages. This allows existing projects
+        to replace performance-critical pieces with Rust code without the
         memory safety risks present with other systems programming languages.
       </p>
       <p>

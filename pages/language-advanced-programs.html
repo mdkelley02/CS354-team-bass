@@ -98,34 +98,59 @@ Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]<br>
 After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br>
 Sort numbers in ascending order:<br>
 Before: [43, 65, 23, 78, 4, -30, 12, 89, 3335, 60]<br>
-After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
+After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br>
+
+After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
         
       </p>
       <pre><code class="language-rust">
-        fn main() {
 
-          println!("Sort strings alphabetically");
-          let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
-          println!("Before: {:?}", strings); 
-          insertion_sort(&mut strings); // calling the insertion sort function
-          println!("After:  {:?}\n", strings);
-          println!("Sort numbers ascending");
-          let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
-          println!("Before: {:?}", nums);  // inserting the entrie array here with {:?}
-          insertion_sort(&mut nums);
-          println!("After:  {:?}\n", nums);
-          
-      }
-      
-      fn insertion_sort<T: Ord>(arr: &mut [T]) {
-          for i in 1..arr.len() {
-              let mut k = i;
-              while k > 0 && arr[k] < arr[k - 1] {
-                  arr.swap(k, k - 1);
-                  k = k - 1;
-              }
-          }
-      }
+      fn main() {
+
+        println!("Sort strings alphabetically");
+        let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
+        println!("Before: {:?}", strings); 
+        insertion_sort(&mut strings); // calling the insertion sort function
+        println!("After:  {:?}\n", strings);
+        println!("Sort numbers ascending");
+        let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
+        println!("Before: {:?}", nums);  // inserting the entrie array here with {:?}
+        insertion_sort(&mut nums);
+        println!("After:  {:?}\n", nums);
+        let mut nums2 = [23,45,90,223,-50,22,1,987];
+        bubble_sort(&mut nums2);
+        println!("After: {:?}\n", nums2);
+        
+    }
+    
+    fn insertion_sort<T: Ord>(arr: &mut [T]) {
+        for i in 1..arr.len() {
+            let mut k = i;
+            while k > 0 && arr[k] < arr[k - 1] {
+                arr.swap(k, k - 1);
+                k = k - 1;
+            }
+        }
+    }
+    
+    fn bubble_sort<T: PartialOrd>(input: &mut [T]) {
+        if input.len() < 2 {return;}
+        
+        let input_len = input.len();
+    
+        for i in (0..input_len).rev() {
+            let mut has_swapped = false;
+            for j in 0..i {
+                if input[j] > input[j + 1] {
+                    input.swap(j, j + 1);
+                    has_swapped = true;
+                }
+            }
+            if !has_swapped {
+                break;
+            }
+        }
+    }
       
       
       </code></pre>
