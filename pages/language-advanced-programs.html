@@ -89,99 +89,121 @@
         $ ./your_program_name
       </code></pre>
       <hr>
-      <h2>Sorting: Insertion Sort Implementation</h2>
+
+
+      <h2>Insertion Sort</h2>
       <h4><i>(Author: Brandon Mattaini)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>for loop with range</li>
+        <li>lack of parentheses in conditions</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
-Sort strings alphabetically:<br>
-Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]<br>
-After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br>
-Sort numbers in ascending order:<br>
-Before: [43, 65, 23, 78, 4, -30, 12, 89, 3335, 60]<br>
-After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
-        
+        Sort strings alphabetically:<br>
+        Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]<br>
+        After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br><br>
+
+        Sort numbers in ascending order:<br>
+        Before: [43, 65, 23, 78, 4, -30, 12, 89, 3335, 60]<br>
+        After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
       </p>
       <pre><code class="language-rust">
         fn main() {
+           let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
+           let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
 
-          println!("Sort strings alphabetically");
-          let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
-          println!("Before: {:?}", strings); 
-          insertion_sort(&mut strings); // calling the insertion sort function
-          println!("After:  {:?}\n", strings);
-          println!("Sort numbers ascending");
-          let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
-          println!("Before: {:?}", nums);  // inserting the entrie array here with {:?}
-          insertion_sort(&mut nums);
-          println!("After:  {:?}\n", nums);
-          
-      }
+           println!("Sort strings alphabetically");
+           println!("Before: {:?}", strings);
+           insertion_sort(&mut strings); // calling the insertion sort function
+           println!("After:  {:?}\n", strings);
+
+           println!("Sort numbers ascending");
+           println!("Before: {:?}", nums);  // inserting the entire array here with {:?}
+           insertion_sort(&mut nums);
+           println!("After:  {:?}\n", nums);
+        }
       
-      fn insertion_sort<T: Ord>(arr: &mut [T]) {
-          for i in 1..arr.len() {
-              let mut k = i;
-              while k > 0 && arr[k] < arr[k - 1] {
-                  arr.swap(k, k - 1);
-                  k = k - 1;
-              }
-          }
-      }
-      
-      
+        fn insertion_sort&ltT: Ord>(arr: &mut [T]) {
+            for i in 1..arr.len() {
+                let mut k = i;
+                while k > 0 && arr[k] < arr[k - 1] {
+                    arr.swap(k, k - 1);
+                    k = k - 1;
+                }
+            }
+        }
       </code></pre>
       <hr>
-      <h2>Sorting: Mergesort Implementation</h2>
+
+
+      <h2>Mergesort</h2>
       <h4><i>(Author: Matthew Kelley)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>more tuple type use</li>
+        <li>lack of increment operator</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
         <span>1, 2, 3, 4, 5, 6</span>
       </p>
       <pre><code class="language-rust">
-      fn mergesort(arr: &mut [i32]) {
-          if arr.len() > 1 {
-              let mid = arr.len() / 2;
-              let (left, right) = arr.split_at_mut(mid);
-              mergesort(left);
-              mergesort(right);
-              merge(left, right, arr);
-          }
-      }
+        fn mergesort(arr: &mut [i32]) {
+            if arr.len() > 1 {
+                let mid = arr.len() / 2;
+                let (left, right) = arr.split_at_mut(mid);
+                mergesort(left);
+                mergesort(right);
+                merge(left, right, arr);
+            }
+        }
+
+        fn merge(left: &mut [i32], right: &mut [i32], arr: &mut [i32]) {
+            let mut i = 0;
+            let mut j = 0;
+            let mut k = 0;
+            while i < left.len() && j < right.len() {
+                if left[i] <= right[j] {
+                    arr[k] = left[i];
+                    i += 1;
+                } else {
+                    arr[k] = right[j];
+                    j += 1;
+                }
+                k += 1;
+            }
+            while i < left.len() {
+                arr[k] = left[i];
+                i += 1;
+                k += 1;
+            }
+            while j < right.len() {
+                arr[k] = right[j];
+                j += 1;
+                k += 1;
+            }
+        }
       
-      fn merge(left: &mut [i32], right: &mut [i32], arr: &mut [i32]) {
-          let mut i = 0;
-          let mut j = 0;
-          let mut k = 0;
-          while i < left.len() && j < right.len() {
-              if left[i] <= right[j] {
-                  arr[k] = left[i];
-                  i += 1;
-              } else {
-                  arr[k] = right[j];
-                  j += 1;
-              }
-              k += 1;
-          }
-          while i < left.len() {
-              arr[k] = left[i];
-              i += 1;
-              k += 1;
-          }
-          while j < right.len() {
-              arr[k] = right[j];
-              j += 1;
-              k += 1;
-          }
-      }
-      
-      fn main() {
-          let mut arr = [1, 5, 6, 3, 2, 4];
-          mergesort(&mut arr);
-          println!("{:?}", arr);
-      }
+        fn main() {
+            let mut arr = [1, 5, 6, 3, 2, 4];
+            mergesort(&mut arr);
+            println!("{:?}", arr);
+        }
       </code></pre>
       <hr>
+
+
       <h2>Bank (from la2)</h2>
       <h4><i>(Author: Cory Tomlinson)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>lifetimes/borrowing</li>
+        <li>lack of inheritance & different approach to OO</li>
+        <li>traits</li>
+        <li>? operator</li>
+        <li>return without return statement</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
         01001:Ann:100.00<br>
@@ -292,8 +314,15 @@ After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
         }
       </code></pre>
       <hr>
+
+
       <h2>Linked List</h2>
       <h4><i>(Author: Taylor Brooks)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>smart pointers/Box/recursive types</li>
+        <li>trait derivation</li>
+      </ul>
       <p>Running the below program will output the following:</p>
       <p class="mono">
         2 added to list<br>
@@ -387,8 +416,15 @@ After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
       </code></pre>
       <hr>
 
-      <h2>File Management: Read/Write/Regex</h2>
+      <h2>File IO: Read/Write/Regex</h2>
       <h4><i>(Author: Senami Hodonu)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>expect</li>
+        <li>unwrap</li>
+        <li>&str vs String</li>
+        <li>file operations</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
         <strong>Running a package in rust: $ cargo run [optional arguments]</strong><br><br>
@@ -440,7 +476,6 @@ After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
         "5"<br>
         "1234"<br>
         "56"<br><br>
-
       </p>
       <pre><code class="language-rust">
         use std::fs::File; //file struct
@@ -456,7 +491,7 @@ After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
         fn main() {
             //Program takes in commandline arguments
             //read, write or regex
-            let args: Vec<String> = env::args().collect();
+            let args: Vec&ltString> = env::args().collect();
             println!("{:?}", args);
             let command = &args[1];
         
@@ -504,6 +539,10 @@ After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
 
       <h2>Macro TT Muncher Parser</h2>
       <h4><i>(Author: Xavier Black)</i></h4>
+      <p>Concepts:</p>
+      <ul>
+        <li>custom macros</li>
+      </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
         m = 30<br>
