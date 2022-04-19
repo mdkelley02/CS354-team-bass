@@ -8,8 +8,8 @@
     <!-- highlight.js theme -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github-dark-dimmed.min.css"
-      integrity="sha512-zcatBMvxa7rT7dDklfjauWsfiSFParF+hRfCdf4Zr40/MmA1gkFcBRbop0zMpvYF3FmznYFgcL8wlcuO/GwHoA=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/atelier-savanna.min.css"
+      integrity="sha512-iIJWR1qiBpEbiTqcERO1RH5DS3YsRlGvm5mEa/S54GwrGmvMmYwiDGNao5XSUtPxs0U7BnbMre8H3UtiHTO9lg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -77,6 +77,36 @@
         management are usually required, Rust is able to ignore those
         requirements and operate with safe and unsafe code.
       </p>
+      <h2>Convient Tool Chain: cargo</h2>
+      <p>
+        Although you can use <code class="inline-code">rustc</code> to compile
+        your Rust program into a native binary. Rust developers seldom use this
+        future and instead opt to use the built in package manager cargo. Cargo
+        is Rust's build tool, dependency manager, test-runner, and project
+        bootstrapper.
+      </p>
+      <p>Creating a new project with cargo.</p>
+      <pre><code class="language-console">
+        $ cargo new my-new-project
+      </code></pre>
+      <p>This will create a new project in the current directory</p>
+      <pre><code class="language-console">
+        $ ls
+        Cargo.lock
+        Cargo.toml
+        src
+        src/main.rs
+        src/lib.rs
+      </code></pre>
+      <p>Running your project with cargo</p>
+      <pre><code class="language-console">
+        $ cargo run
+        Hello, world!
+      </code></pre>
+      <p>Running your tests with cargo</p>
+      <pre><code class="language-console">
+        $ cargo test
+      </code></pre>
       <h2>Safe and Unsafe Code</h2>
       <p>
         In safe code, every given object has the exact amount of memory needed

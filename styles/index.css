@@ -94,3 +94,13 @@ pre::-webkit-scrollbar-thumb {
 .header-list a:hover {
   color: goldenrod;
 }
+
+.inline-code {
+  background-color: #191919;
+  color: white;
+  padding: 0 0.25rem;
+  font-family: monospace;
+}
+.code-snippet {
+  padding: 0;
+}
