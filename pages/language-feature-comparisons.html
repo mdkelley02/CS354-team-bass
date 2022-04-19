@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,66 +24,152 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css"
     />
     <!-- global styling -->
-    <link
-      rel="stylesheet"
-      href="../styles/index.css"
-    />
+    <link rel="stylesheet" href="../styles/index.css" />
   </head>
 
+  <header>
+    <div class="header-container">
+      <div class="container">
+        <div class="header-list">
+          <div>
+            <a href="../index.html">Home</a>
+          </div>
+          <div>
+            <a href="language-history.html">History</a>
+          </div>
+          <div>
+            <a href="language-specs.html">Specs</a>
+          </div>
+          <div>
+            <a href="language-translators.html">Translators</a>
+          </div>
+          <div>
+            <a href="language-intro-programs.html">Intro Programs</a>
+          </div>
+          <div>
+            <a href="language-advanced-programs.html">Advanced Programs</a>
+          </div>
+          <div>
+            <a href="language-feature-comparisons.html">Feature Comparisons</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <body>
     <div class="container">
       <h1>Feature Comparisons</h1>
-      <hr>
+      <hr />
 
-      <h2> What is Rust and how does it compare to other languages?</h2>
-      <p>Well it is first important to note that Rust is a general purpose langauge, low level, and is best suited for
-      systems, and other performance critical code.</p>
-      <p>The largest and most noticeable difference between Rust and object oriented languages like C++ is the focus on
-      safe code.</p>
-      <p>In languages like C++ and C where pointer arithmatic and memory management are usually required, Rust is able
-      to ignore those requirements and operate with safe and unsafe code.</p>
+      <h2>What is Rust and how does it compare to other languages?</h2>
+      <p>
+        Well it is first important to note that Rust is a general purpose
+        langauge, low level, and is best suited for systems, and other
+        performance critical code.
+      </p>
+      <p>
+        The largest and most noticeable difference between Rust and object
+        oriented languages like C++ is the focus on safe code.
+      </p>
+      <p>
+        In languages like C++ and C where pointer arithmatic and memory
+        management are usually required, Rust is able to ignore those
+        requirements and operate with safe and unsafe code.
+      </p>
       <h2>Safe and Unsafe Code</h2>
-      <p>In safe code, every given object has the exact amount of memory needed and it is promised to be allocated for that
-      object.</p>
-      <p>When a user trys to access an object, it is impossible to incorrectly access a memory location out of bounds.
-      And when the process is done, the object is then automatically deallocated so the user does not have to manually
-      free the object themselves.</p>
-      <p>In unmanaged code, it is harder to write correct code but it also open up room for more bugs and errors to be
-      present such as buffer overflows.</p>
-      <p>While unmanaged/unsafe code is dangerous, it also can be incredibly fast in terms of operation performance.</p>
-      <p>This is where Rust comes into play. Rust is able to let the user write unsafe code and convert it to safe code.
-      This makes the overall experience of the language much easier to learn because the avoidance of many errors that
-      would be present in other languages. </p>
-      <p>Rust is also very serious about enforcing its strong type system and memory safety, although not being a garbage collecting language like Java or Go.
-      It will not allow you to compile if there are any errors in the code. It will not compile if you have a null pointer. This is a little frustrating 
-      and makes it so that development and prototyping, especially for newcomers, is a lot of error messages. It does not give you the rope to hang yourself 
-      that is available in C and C++.</p>
+      <p>
+        In safe code, every given object has the exact amount of memory needed
+        and it is promised to be allocated for that object.
+      </p>
+      <p>
+        When a user trys to access an object, it is impossible to incorrectly
+        access a memory location out of bounds. And when the process is done,
+        the object is then automatically deallocated so the user does not have
+        to manually free the object themselves.
+      </p>
+      <p>
+        In unmanaged code, it is harder to write correct code but it also open
+        up room for more bugs and errors to be present such as buffer overflows.
+      </p>
+      <p>
+        While unmanaged/unsafe code is dangerous, it also can be incredibly fast
+        in terms of operation performance.
+      </p>
+      <p>
+        This is where Rust comes into play. Rust is able to let the user write
+        unsafe code and convert it to safe code. This makes the overall
+        experience of the language much easier to learn because the avoidance of
+        many errors that would be present in other languages.
+      </p>
+      <p>
+        Rust is also very serious about enforcing its strong type system and
+        memory safety, although not being a garbage collecting language like
+        Java or Go. It will not allow you to compile if there are any errors in
+        the code. It will not compile if you have a null pointer. This is a
+        little frustrating and makes it so that development and prototyping,
+        especially for newcomers, is a lot of error messages. It does not give
+        you the rope to hang yourself that is available in C and C++.
+      </p>
       <h2>Ownership</h2>
-      <p>Rust ensures memory safety through a model known as Ownership. This is a memory management model unlike most programming languages that use 
-        garbage collection (Java) or manual memory management (C). Rust checks during compliation that the program does not break any of the 3 following rules. 
-        If a rule is broken the program will not compile.</p>
-        <ul>
-          <li>Each value has a variable called its owner.</li>
-          <li>For each value there can only be one owner at a time.</li>
-          <li>When the owner goes out of scope, the value is dropped (the memory is freed).</li>
-        </ul>
-        <p>This is where Rust's borrow system comes into play. Variables are constantly 'borrowed' throughout the program by passing references to variables.
-          Unlike C, references in Rust are guaranteed to point to valid objects.</p>
+      <p>
+        Rust ensures memory safety through a model known as Ownership. This is a
+        memory management model unlike most programming languages that use
+        garbage collection (Java) or manual memory management (C). Rust checks
+        during compliation that the program does not break any of the 3
+        following rules. If a rule is broken the program will not compile.
+      </p>
+      <ul>
+        <li>Each value has a variable called its owner.</li>
+        <li>For each value there can only be one owner at a time.</li>
+        <li>
+          When the owner goes out of scope, the value is dropped (the memory is
+          freed).
+        </li>
+      </ul>
+      <p>
+        This is where Rust's borrow system comes into play. Variables are
+        constantly 'borrowed' throughout the program by passing references to
+        variables. Unlike C, references in Rust are guaranteed to point to valid
+        objects.
+      </p>
       <h2>Rusts Static Typing</h2>
-      <p>Rust has the feature of type inference for it's statically-typed system; however, unlike other statically-typed languages it does not allow for the 
-      Null type. However, the type inference has some limited circumstances in requiring top-level items like function arguments and constants be explicitly typed.</p>
-      <p>Rust's concurrent programming is another aspect that puts safety first. One of the problems with multi-threading is the threat of data races. Rust solves this
-      by locking objects to only one thread at a time it ensures operations on the object will not break, unlike Go that solves the issue by synchronization and 
-      message passing. </p>
+      <p>
+        Rust has the feature of type inference for it's statically-typed system;
+        however, unlike other statically-typed languages it does not allow for
+        the Null type. However, the type inference has some limited
+        circumstances in requiring top-level items like function arguments and
+        constants be explicitly typed.
+      </p>
+      <p>
+        Rust's concurrent programming is another aspect that puts safety first.
+        One of the problems with multi-threading is the threat of data races.
+        Rust solves this by locking objects to only one thread at a time it
+        ensures operations on the object will not break, unlike Go that solves
+        the issue by synchronization and message passing.
+      </p>
       <h2>No Garbage Collecting?</h2>
-      <p>Rust gives you the choice of storing data on the stack or on the heap and determines at compile time when memory is no longer needed and can be cleaned up. This allows efficient usage of memory as well as more performant memory access.</p>
-      <p>Without the need to have a garbage collector continuously running, Rust projects are well-suited to be used as libraries by other programming languages via foreign-function interfaces. This allows existing projects to replace performance-critical pieces with speedy Rust code without the memory safety risks present with other systems programming languages.</p>
-      <p>With direct access to hardware and memory, Rust is an ideal language for embedded and hardware level development.</p>
-      <br><hr>
+      <p>
+        Rust gives you the choice of storing data on the stack or on the heap
+        and determines at compile time when memory is no longer needed and can
+        be cleaned up. This allows efficient usage of memory as well as more
+        performant memory access.
+      </p>
+      <p>
+        Without the need to have a garbage collector continuously running, Rust
+        projects are well-suited to be used as libraries by other programming
+        languages via foreign-function interfaces. This allows existing projects
+        to replace performance-critical pieces with speedy Rust code without the
+        memory safety risks present with other systems programming languages.
+      </p>
+      <p>
+        With direct access to hardware and memory, Rust is an ideal language for
+        embedded and hardware level development.
+      </p>
+      <br />
+      <hr />
     </div>
   </body>
-
 
   <footer>
     <!-- highlight.js -->
@@ -96,5 +181,4 @@
     ></script>
     <script defer src="../scripts/includeHighlights.js"></script>
   </footer>
-
 </html>
