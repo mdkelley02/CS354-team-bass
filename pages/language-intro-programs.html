@@ -1,119 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introductory Programs</title>
-    <!-- highlight.js theme -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/atelier-savanna.min.css"
-      integrity="sha512-iIJWR1qiBpEbiTqcERO1RH5DS3YsRlGvm5mEa/S54GwrGmvMmYwiDGNao5XSUtPxs0U7BnbMre8H3UtiHTO9lg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- Poppins Font -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Poppins"
-    />
-    <!-- Ubuntu Mono Font -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Ubuntu+Mono"
-    />
-    <!-- Boostrap grid -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css"
-    />
-    <!-- global styling -->
-    <link
-      rel="stylesheet"
-      href="../styles/index.css"
-    />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introductory Programs</title>
+  <!-- highlight.js theme -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/atelier-savanna.min.css"
+    integrity="sha512-iIJWR1qiBpEbiTqcERO1RH5DS3YsRlGvm5mEa/S54GwrGmvMmYwiDGNao5XSUtPxs0U7BnbMre8H3UtiHTO9lg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <!-- Poppins Font -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Poppins"
+  />
+  <!-- Ubuntu Mono Font -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Ubuntu+Mono"
+  />
+  <!-- Boostrap grid -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css"
+  />
+  <!-- global styling -->
+  <link
+    rel="stylesheet"
+    href="../styles/index.css"
+  />
+</head>
 
-  <header>
-    <div class="header-container">
-      <div class="container">
-        <div class="header-list">
-          <div>
-            <a href="../index.html">Home</a>
-          </div>
-          <div>
-            <a href="language-history.html">History</a>
-          </div>
-          <div>
-            <a href="language-feature-comparisons.html">Feature Comparisons</a>
-          </div>
-          <div>
-            <a href="language-specs.html">Specs</a>
-          </div>
-          <div>
-            <a href="language-translators.html">Translators</a>
-          </div>
-          <div>
-            <a href="language-intro-programs.html">Intro Programs</a>
-          </div>
-          <div>
-            <a href="language-advanced-programs.html">Advanced Programs</a>
-          </div>
+<header>
+  <div class="header-container">
+    <div class="container">
+      <div class="header-list">
+        <div>
+          <a href="../index.html">Home</a>
+        </div>
+        <div>
+          <a href="language-history.html">History</a>
+        </div>
+        <div>
+          <a href="language-feature-comparisons.html">Feature Comparisons</a>
+        </div>
+        <div>
+          <a href="language-specs.html">Specs</a>
+        </div>
+        <div>
+          <a href="language-translators.html">Translators</a>
+        </div>
+        <div>
+          <a href="language-intro-programs.html">Intro Programs</a>
+        </div>
+        <div>
+          <a href="language-advanced-programs.html">Advanced Programs</a>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <body>
-    <div class="container">
-      <h1>Introductory Programs</h1>
-      <hr>
-      <h2>Build and Run Instructions (For All Programs)</h2>
-      <ol>
-        <li>Ensure all dependencies for your platform are installed by following these instructions <a href="language-translators.html">here.</a></li>
-        <li>Copy one of the desired programs below into a file with a .rs extension. For example, <strong>linked_list.rs</strong>.</li>
-        <li>From the command line, ensure you are in the directory of the copied program, then run the following commands:</li>
-      </ol>
-      <p>(Windows)</p>
-      <pre><code class="language-shell">
+<body>
+<div class="container">
+  <h1>Introductory Programs</h1>
+  <hr>
+
+
+  <h2>Build and Run Instructions (For All Programs)</h2>
+  <ol>
+    <li>Ensure all dependencies for your platform are installed by following these instructions <a href="language-translators.html">here.</a></li>
+    <li>Copy one of the desired programs below into a file with a .rs extension. For example, <strong>linked_list.rs</strong>.</li>
+    <li>From the command line, ensure you are in the directory of the copied program, then run the following commands:</li>
+  </ol>
+  <p>(Windows)</p>
+  <pre><code class="language-shell">
         $ rustc your_program_name.rs
         $ your_program_name.exe
       </code></pre>
-      <p>(Mac & Linux)</p>
-      <pre><code class="language-shell">
+  <p>(Mac & Linux)</p>
+  <pre><code class="language-shell">
         $ rustc your_program_name.rs
         $ ./your_program_name
       </code></pre>
-      <hr>
+  <hr>
 
-      <h2>Summing the elements of an array</h2>
-      <h4><i>(Author: Senami Hodonu)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        Sum: 30<br>
-      </p>
-      <pre><code class="language-rust">
-      fn seqsum(seq: [u8; 6]) -> u8 {
-          //Returns a u8 integer type.
-          //u8: 8-bit unsigned integer type
-          //The iter() method returns an iterator object of the collection
-          //sum() method sums the elements of an iterator.
-          //Takes each element, adds them together, and returns the result.
-          seq.iter().sum()
-      }
-      fn main() {
-          let seq = [5,6,1,8,3,7];
-          println!("Sum: {}", seqsum(seq));
-      }
-      
+
+  <h2>Summing an array</h2>
+  <h4><i>(Author: Senami Hodonu)</i></h4>
+  <p>Concepts:</p>
+  <ul>
+    <li>data types & type inference</li>
+    <li>iterating over collections</li>
+    <li>println! macro</li>
+    <li>format string</li>
+  </ul>
+  <p>Running this program will output the following:</p>
+  <p class="mono">
+    Sum: 30<br>
+  </p>
+  <pre><code class="language-rust">
+        fn seqsum(seq: [u8; 6]) -> u8 {
+            //Returns a u8 integer type.
+            //u8: 8-bit unsigned integer type
+            //The iter() method returns an iterator object of the collection
+            //sum() method sums the elements of an iterator.
+            //Takes each element, adds them together, and returns the result.
+            seq.iter().sum()
+        }
+        fn main() {
+            let seq = [5,6,1,8,3,7];
+            println!("Sum: {}", seqsum(seq));
+        }
       </code></pre>
-      <hr>
+  <hr>
 
-      <h2>Fizz Buzz Example with Match Statement</h2>
-      <h4><i>(Author: Matthew Kelley)</i></h4>
-      <pre><code class="language-rust">
+
+  <h2>Fizz Buzz</h2>
+  <h4><i>(Author: Matthew Kelley)</i></h4>
+  <p>Concepts:</p>
+  <ul>
+    <li>for loop</li>
+    <li>ranges</li>
+    <li>tuple type</li>
+    <li>pattern matching</li>
+  </ul>
+  <pre><code class="language-rust">
         fn main() {
           for i in 0..100 {
             match (i % 3, i % 5) {
@@ -125,172 +142,205 @@
           }
         }
       </code></pre>
-      <hr>
+  <hr>
 
-      <h2>Basic Exception Handling</h2>
-      <h4><i>(Author: Brandon Mattaini)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        thread 'main' panicked at 'NOT_AN_EVEN', basicProgram.rs:22:8
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace<br>
-        or<br>
-        Thank you, this number is even<br>
-      </p>
-      <pre><code class="language-rust">
-      use std::env;
-    
-      fn main(){
-          
-         let args:Vec<String> = env::args().collect();
-          
-          let user_num:i32 = match args.len() {
-             2 => {
-                match args[1].parse::<i32>() {
-                   Ok(num) => num,
-                   Err(_) => panic!("You must enter an integer")
-                }
-             },
-             _ => panic!("Please provide an integer")
-          };
-         
-      
-          if user_num%2 == 0 {
-             println!("Correct! This number is even!");
-          } else {
-             panic!("NOT_AN_EVEN"); // panic! macro being used
-          }
-          println!("End of main");
-       }
-            </code></pre>
-      <hr>
 
-      <h2>Basic Struct and Enum</h2>
-      <h4><i>(Author: Taylor Brooks)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        Student { name: "Joe", grade: B, age: 20, major: "Mechanical Engineering" } <br>
-        Student { name: "Joe", grade: A, age: 20, major: "Mechanical Engineering" }<br>
-      </p>
-      <pre><code class="language-rust">
-              #[derive(Debug)]
-              enum Grade {
-                  A,
-                  B,
-                  C,
-                  D,
-                  F,
-              }
-      
-              #[derive(Debug)]
-              struct Student {
-                  name: &'static str,
-                  grade: Grade,
-                  age: i32,
-                  major: String
-              }
-      
-              impl Student {
-                  fn changeGrade(&mut self, newGrade: Grade)  {
-                      self.grade = newGrade;
-                  }
-              }
-      
-              fn main() {
-                  let mut student = Student {name: "Joe", grade: Grade::B, age: 20, major: "Mechanical Engineering".to_string()  };
-                  println!("{:?}", student);
-                  student.changeGrade(Grade::A);
-                  println!("{:?}", student);
-              }
-            </code></pre>
-      <hr>
-      <h2>Basic Lambdas and Higher Order Functions</h2>
-      <h4><i>(Author: Cory Tomlinson)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        5050<br>
-        3628800<br>
-      </p>
-      <pre><code class="language-rust">
-              use std::ops::{Mul, RangeInclusive};
-      
-              fn sum_range(range:RangeInclusive&lti32>)->i32 {
-                 range.fold(0,|acc,n| acc+n)
-              }
-      
-              fn op_range&ltF>(range:RangeInclusive&lti32>,op:F)->Option&lti32> where F:Fn(i32,i32)->i32 {
-                 range.reduce(|acc,n| op(acc,n))
-              }
-      
-              fn main() {
-                 println!("{}",sum_range(1..=100));
-                 println!("{}",match op_range(1..=10,i32::mul) {
-                    Some(result) => result,
-                    None => panic!("op_range returned an empty value")
-                 });
-              }
-            </code></pre>
-      <hr>
-      <h2>Testing Example</h2>
-      <h4><i>(Author: Xavier Black)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        This test fails thread 'tests::failure' panicked at 'This test fails'<br>
-        assertion failed: f thread 'tests::false_assertion' panicked at 'assertion failed: f'<br>
-        Test ignored.<br>
-      </p>
-      <pre><code class="language-rust">
-      #[cfg(test)]
-        mod tests {
-          //Unit testing is built into the language and can be started with #[cfg(test)], a mod tests and the #[test] for each test
-          #[test]
-           fn it_works() {
-            let result = 2 + 2;
-            assert_eq!(result, 4);
-          }
-          //Tests fail if put into panic
-          #[test]
-          fn failure() {
-            panic!("This test fails");
-          }
-          //Different ways to have a test pass similar to jUnit testing.
-          #[test]
-          fn asserting() {
-            let t = true;
-            assert!(t);
-          }
-          #[test]
-          fn false_assertion() {
-            let f = false;
-            assert!(f);
-          }
-          //Can disable a test with #[ignore] with a message about why it is being ignored
-          #[test]
-          #[ignore = "Not done yet"]
-          fn too_lazy() {
-            panic!("This doesn't matter");
-          }
-          //Pass if a error should be thrown and can have it match specific error messages
-          #[test]
-          #[should_panic = "Fire!"]
-          fn dumpster_fire() {
-            assert_ne!(2,2,"Fire!")
-          }
-        }  
+  <h2>Even number checker</h2>
+  <h4><i>(Author: Brandon Mattaini)</i></h4>
+  <p>Concepts:</p>
+  <ul>
+    <li>command line args</li>
+    <li>library imports</li>
+    <li>the match statement for exception handling</li>
+  </ul>
+  <p>Running this program will output the following:</p>
+  <p class="mono">
+    thread 'main' panicked at 'NOT_AN_EVEN', basicProgram.rs:22:8
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace<br>
+    or<br>
+    Thank you, this number is even<br>
+  </p>
+  <pre><code class="language-rust">
+        use std::env;
+
+        fn main(){
+
+           let args:Vec&ltString> = env::args().collect();
+
+           let user_num:i32 = match args.len() {
+              2 => {
+                 match args[1].parse::&lti32>() {
+                    Ok(num) => num,
+                    Err(_) => panic!("You must enter an integer")
+                 }
+              },
+              _ => panic!("Incorrect number of arguments")
+           };
+
+           if user_num%2 == 0 {
+              println!("Correct! This number is even!");
+           } else {
+              panic!("NOT_AN_EVEN"); // panic! macro being used
+           }
+           println!("End of main");
+        }
       </code></pre>
-      <hr>
-      </div>
-      </body>
+  <hr>
 
 
-  <footer>
-    <!-- highlight.js -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"
-      integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script defer src="../scripts/includeHighlights.js"></script>
-  </footer>
+  <h2>Struct, Enum, and impl</h2>
+  <h4><i>(Author: Taylor Brooks)</i></h4>
+  <p>Concepts:</p>
+  <ul>
+    <li>separate data/behavior</li>
+    <li>mandatory type declaration</li>
+    <li>self reference</li>
+    <li>explicit mutability</li>
+    <li>debug attribute & format specifier</li>
+  </ul>
+  <p>Running this program will output the following:</p>
+  <p class="mono">
+    Student { name: "Joe", grade: B, age: 20, major: "Mechanical Engineering" } <br>
+    Student { name: "Joe", grade: A, age: 20, major: "Mechanical Engineering" }<br>
+  </p>
+  <pre><code class="language-rust">
+        #[derive(Debug)]
+        enum Grade { A, B, C, D, F }
+
+        #[derive(Debug)]
+        struct Student {
+            name: &'static str,
+            grade: Grade,
+            age: i32,
+            major: String
+        }
+
+        impl Student {
+            fn changeGrade(&mut self, newGrade: Grade)  {
+                self.grade = newGrade;
+            }
+        }
+
+        fn main() {
+            let mut student = Student {
+               name: "Joe",
+               grade: Grade::B,
+               age: 20,
+               major: "Mechanical Engineering".to_string()
+            };
+            println!("{:?}", student);
+            student.changeGrade(Grade::A);
+            println!("{:?}", student);
+        }
+      </code></pre>
+  <hr>
+
+
+  <h2>Summing/Operating on an array revisited, FP style</h2>
+  <h4><i>(Author: Cory Tomlinson)</i></h4>
+  <p>Concepts:</p>
+  <ul>
+    <li>lambdas & higher order functions</li>
+    <li>inclusive ranges</li>
+    <li>function & type parameters [can be primitive]</li>
+    <li>the Option enum</li>
+  </ul>
+  <p>Running this program will output the following:</p>
+  <p class="mono">
+    5050<br>
+    3628800<br>
+  </p>
+  <pre><code class="language-rust">
+        use std::ops::{Mul, RangeInclusive};
+
+        fn sum_range(range:RangeInclusive&lti32>) -> i32 {
+           range.fold(0,|acc,n| acc+n)
+        }
+
+        fn op_range&ltF>(range:RangeInclusive&lti32>,op:F) -> Option&lti32>
+            where F:Fn(i32,i32) -> i32 {
+           range.reduce(|acc,n| op(acc,n))
+        }
+
+        fn main() {
+           println!("{}",sum_range(1..=100));
+           println!("{}",match op_range(1..=10,i32::mul) {
+              Some(result) => result,
+              None => panic!("op_range requires a range of length >= 2")
+           });
+        }
+      </code></pre>
+  <hr>
+
+
+  <h2>Testing</h2>
+  <h4><i>(Author: Xavier Black)</i></h4>
+  <p>Concepts:</p>
+  <ul>
+    <li>other attributes</li>
+    <li>assert! macro</li>
+    <li>modules</li>
+  </ul>
+  <p>Running this program will output the following:</p>
+  <p class="mono">
+    This test fails thread 'tests::failure' panicked at 'This test fails'<br>
+    assertion failed: f thread 'tests::false_assertion' panicked at 'assertion failed: f'<br>
+    Test ignored.<br>
+  </p>
+  <pre><code class="language-rust">
+        #[cfg(test)]
+        mod tests {
+           //Unit testing is built into the language and can be started with #[cfg(test)],
+           //a mod tests and the #[test] for each test
+           #[test]
+           fn it_works() {
+              let result = 2 + 2;
+              assert_eq!(result, 4);
+           }
+           //Tests fail if put into panic
+           #[test]
+           fn failure() {
+              panic!("This test fails");
+           }
+           //Different ways to have a test pass similar to jUnit testing.
+           #[test]
+           fn asserting() {
+              let t = true;
+              assert!(t);
+           }
+           #[test]
+           fn false_assertion() {
+              let f = false;
+              assert!(f);
+           }
+           //Can disable a test with #[ignore] with a message about why it is being ignored
+           #[test]
+           #[ignore = "Not done yet"]
+           fn too_lazy() {
+              panic!("This doesn't matter");
+           }
+           //Pass if a error should be thrown and can have it match specific error messages
+           #[test]
+           #[should_panic = "Fire!"]
+           fn dumpster_fire() {
+              assert_ne!(2,2,"Fire!")
+           }
+        }
+      </code></pre>
+  <hr>
+</div>
+</body>
+
+
+<footer>
+  <!-- highlight.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"
+    integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script defer src="../scripts/includeHighlights.js"></script>
+</footer>
 
 </html>
