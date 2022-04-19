@@ -1,10 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cache Port</title>
+  <!-- highlight.js theme -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/atelier-savanna.min.css"
+    integrity="sha512-iIJWR1qiBpEbiTqcERO1RH5DS3YsRlGvm5mEa/S54GwrGmvMmYwiDGNao5XSUtPxs0U7BnbMre8H3UtiHTO9lg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <!-- Poppins Font -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Poppins"
+  />
+  <!-- Ubuntu Mono Font -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Ubuntu+Mono"
+  />
+  <!-- Boostrap grid -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css"
+  />
+  <!-- global styling -->
+  <link
+    rel="stylesheet"
+    href="../styles/index.css"
+  />
+</head>
+
+<header>
+  <div class="header-container">
+    <div class="container">
+      <div class="header-list">
+        <div>
+          <a href="../index.html">Home</a>
+        </div>
+        <div>
+          <a href="language-history.html">History</a>
+        </div>
+        <div>
+          <a href="language-feature-comparisons.html">Feature Comparisons</a>
+        </div>
+        <div>
+          <a href="language-specs.html">Specs</a>
+        </div>
+        <div>
+          <a href="language-translators.html">Translators</a>
+        </div>
+        <div>
+          <a href="language-intro-programs.html">Intro Programs</a>
+        </div>
+        <div>
+          <a href="language-advanced-programs.html">Advanced Programs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<body>
+<div class="container">
+  <h1>CS 321 Cache Program, Rust Port</h1>
+  <hr>
+
+
+  <h2>cache.rs</h2>
+  <pre><code class="language-rust">
+    #![feature(linked_list_remove)] //must use nightly build to use this ($ rustup default nightly)
+
+    use std::collections::{LinkedList, VecDeque}; //use VecDeque if using stable build ($ rustup default stable)
+    use std::fmt::{Display, Formatter, Result};
+
+
+    #[derive(Debug)]
+    pub struct Cache&ltT:Eq+Display> {
+       capacity:usize,
+       list:LinkedList&ltT>
+    }
+
+
+    impl&ltT:Eq+Display> Cache&ltT> {
+
+       pub fn new(capacity:usize) -> Cache&ltT> {
+          Cache {
+             capacity: capacity,
+             list: LinkedList::new()
+          }
+       }
+
+       pub fn write(&mut self, object:T) {
+          self.lookup(object);
+       }
+
+       pub fn lookup(&mut self, object:T) -> Option&ltT> {
+          if self.list.len() == 0 {
+             self.add_to_front(object);
+             return None;
+          }
+          else {
+             let cached_object:Option&ltT> = self.remove(&object);
+             self.add_to_front(object);
+             return cached_object;
+          }
+       }
+
+       pub fn add_to_front(&mut self, object:T) {
+          if self.list.len() == self.capacity {
+             self.list.pop_back();
+          }
+          self.list.push_front(object);
+       }
+
+       pub fn remove(&mut self, object:&T) -> Option&ltT> {
+          match self.list.iter().position(|e| e==object) { //object must implement Eq
+             None => None,
+             Some(idx) => Some(self.list.remove(idx))
+          }
+       }
+
+       pub fn clear(&mut self) {
+          self.list.clear();
+       }
+    }
+
+
+    impl&ltT:Eq+Display> Display for Cache&ltT> {
+       fn fmt(&self, f:&mut Formatter<'_>) -> Result {
+          for (i,e) in self.list.iter().enumerate() {
+             writeln!(f,"{}: {}",i,e)?; //e must implement Display
+          }
+          Ok(())
+       }
+    }
+  </code></pre>
+  <hr>
+
+
+  <h2>cargo.toml</h2>
+  <pre><code class="language-rust">
+    [package]
+    name = "cache"
+    version = "0.1.0"
+    edition = "2021"
+
+    [dependencies]
+    indoc = "1.0"
+    ansi_term = "0.12"
+  </code></pre>
+  <hr>
+
+
+  <h2>main.rs</h2>
+  <pre><code class="language-rust">
+    #![allow(warnings, unused)]
+    #![feature(linked_list_remove)] //must use nightly build to use this ($ rustup default nightly)
+
+    pub mod cache;
+
+    use cache::Cache;
+
+    use ansi_term::Color::*;
+    use indoc::indoc;
+    use std::env;
+    use std::error::Error;
+    use std::fs::File;
+    use std::io::ErrorKind::NotFound;
+    use std::io::ErrorKind::PermissionDenied;
+    use std::io::Read;
+    use std::num::ParseIntError;
+    use std::num::IntErrorKind::InvalidDigit;
+    use std::time::Instant;
+
+
+    fn print_usage() {
+        print!("{}",indoc!{"
+            Usage:
+                cargo run --release 1 <1st-level_cache_size> &ltinput_textfile_name>
+                cargo run --release 2 <1st-level_cache_size> <2nd-level_cache_size> &ltinput_textfile_name>
+        "});
+    }
+
+
+    fn main() {
+        if let Err(e) = run() {
+            if let Some(unboxed_err) = e.downcast_ref::&ltstd::num::ParseIntError>() {
+                if unboxed_err.kind() == &InvalidDigit {
+                    eprintln!("{}",Red.paint("Fields 2 and/or 3 must be positive integers"));
+                }
+            }
+            else if let Some(unboxed_err) = e.downcast_ref::&ltstd::io::Error>() {
+                if unboxed_err.kind() == NotFound {
+                    eprintln!("{}",Red.paint("File not found"));
+                }
+                else if unboxed_err.kind() == PermissionDenied {
+                    eprintln!("{}",Red.paint("You don't have permission to open that file"));
+                }
+            }
+            else {
+                eprintln!("{}",Red.paint(format!("{}",e))); //generic Errs
+            }
+            print_usage();
+        }
+    }
+
+
+    fn run() -> Result<(),Box&ltdyn Error>> {
+        //begin timing program execution
+        let start = Instant::now();
+        print!("{}",indoc!{"
+            ********************* NOTE *********************
+            Program execution may take approx. 5-15 seconds.
+            Run time will be reported upon completion.
+            ************************************************
+        "});
+
+        //argument variables
+        let mut use_2lvl_cache = false;
+        let mut cache1_capacity = 0;
+        let mut cache2_capacity = 0;
+        let mut filepath = String::new();
+
+        //test metric variables
+        let mut num_refs1 = 0;
+        let mut num_refs2 = 0;
+        let mut num_hits1 = 0;
+        let mut num_hits2 = 0;
+        let mut num_hits_total = 0;
+        let mut hit_ratio1 = 0.0;
+        let mut hit_ratio2 = 0.0;
+        let mut hit_ratio_global = 0.0;
+
+        //echo user input
+        let args:Vec&ltString> = env::args().collect();
+        println!("You entered:");
+        for (i,arg) in args.iter().enumerate() {
+            println!("\tfield {}: {}",i,arg);
+        }
+        println!();
+
+        //process args
+        if !(4<=args.len() && args.len()<=5) {
+            Err("Incorrect number of arguments provided")?
+        }
+        cache1_capacity = args[2].parse::&ltusize>()?;
+        match args[1].as_str() {
+            "1" => {
+                use_2lvl_cache = false;
+                filepath = args[3].clone();
+            },
+            "2" => {
+                use_2lvl_cache = true;
+                cache2_capacity = args[3].parse::&ltusize>()?;
+                filepath = args[4].clone();
+            },
+            _ => Err("Field 1 must be a 1 or 2")?
+        }
+
+        //set up String token iterator for producing tokens for the cache(s) to store
+        let mut file_text = String::new();
+        File::open(&filepath)?.read_to_string(&mut file_text)?;
+        let mut token_iter = file_text.split_whitespace();
+
+        //instantiate cache(s) with the specified capacity
+        let mut cache1 = Cache::new(cache1_capacity);
+        let mut cache2 = Cache::new(cache2_capacity);
+        println!("First level cache with {} entries has been created",cache1_capacity);
+        if use_2lvl_cache {
+            println!("Second level cache with {} entries has been created",cache2_capacity);
+        }
+
+        //produce tokens to exercise cache(s) and collect metrics
+        while let Some(token) = token_iter.next() {
+            num_refs1 += 1;
+            if let Some(_) = cache1.lookup(token) {
+                num_hits1 += 1;
+                if use_2lvl_cache {
+                    cache2.write(token);
+                }
+            }
+            else if use_2lvl_cache {
+                num_refs2 += 1;
+                if let Some(_) = cache2.lookup(token) {
+                    num_hits2 += 1;
+                }
+            }
+        }
+
+        //calculate results
+        num_hits_total = num_hits1 + num_hits2;
+        hit_ratio1 = if num_refs1!=0 {num_hits1 as f64 / num_refs1 as f64} else {0.0};
+        hit_ratio2 = if num_refs2!=0 {num_hits2 as f64 / num_refs2 as f64} else {0.0};
+        hit_ratio_global = if num_refs1!=0 {num_hits_total as f64 / num_refs1 as f64} else {0.0};
+
+        //print results
+        println!("\n----------------- RESULTS -----------------");
+        println!("The number of global references: {}",num_refs1);
+        println!("The number of global cache hits: {}",num_hits_total);
+        println!("The global cache hit ratio     : {:.3}\n",hit_ratio_global);
+
+        println!("The number of 1st-level references: {}",num_refs1);
+        println!("The number of 1st-level cache hits: {}",num_hits1);
+        println!("The 1st-level cache hit ratio     : {:.3}\n",hit_ratio1);
+
+        if use_2lvl_cache {
+            println!("The number of 2nd-level references: {}",num_refs2);
+            println!("The number of 2nd-level cache hits: {}",num_hits2);
+            println!("The 2nd-level cache hit ratio     : {:.3}\n",hit_ratio2);
+        }
+
+        //display total run time
+        let elapsed = start.elapsed();
+        println!("Program execution took {}.{:0<3} seconds\n",elapsed.as_secs(),elapsed.subsec_millis());
+
+        Ok(())
+    }
+  </code></pre>
+  <hr>
+
+</div>
 </body>
+
+
+<footer>
+  <!-- highlight.js -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"
+    integrity="sha512-IaaKO80nPNs5j+VLxd42eK/7sYuXQmr+fyywCNA0e+C6gtQnuCXNtORe9xR4LqGPz5U9VpH+ff41wKs/ZmC3iA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script defer src="../scripts/includeHighlights.js"></script>
+</footer>
+
 </html>
