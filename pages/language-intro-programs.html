@@ -95,17 +95,18 @@
       <hr>
 
 
-      <h2>TBD Example 1</h2>
-      <h4><i>(Author: TBD)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        TBD line1<br>
-        TBD line2<br>
-        TBD etc...<br>
-      </p>
+      <h2>Fizz Buzz Example with Match Statement</h2>
+      <h4><i>(Author: Matthew Kelley)</i></h4>
       <pre><code class="language-rust">
         fn main() {
-           println!("hello world");
+          for i in 0..100 {
+            match (i % 3, i % 5) {
+              (0, 0) => println!("FizzBuzz"),
+              (0, _) => println!("Fizz"),
+              (_, 0) => println!("Buzz"),
+              _ => println!("{}", i),
+            }
+          }
         }
       </code></pre>
       <hr>
