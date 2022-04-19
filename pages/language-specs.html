@@ -57,11 +57,17 @@
       <h2>Specification</h2>
       <p>
         Rust doesn't have an explicit language specification, as there is
-        currently (Mar 2022) only one compiler, so portability between different
-        compilers is not yet a concern. It does, however, have an official
-        reference manual which is linked below.
+        currently (as of Apr 2022) only one compiler. Since supporting portability
+        between different compilers is often a primary motivation for writing and
+        maintaining a language specification, this is not yet a concern for Mozilla.
+        It does, however, have an official reference manual which is linked below.
       </p>
-      <a href="https://doc.rust-lang.org/reference/">Rust Reference Manual</a>
+      <a href="https://doc.rust-lang.org/reference/">The Rust Reference</a>
+      <p>
+        Furthermore, since the language is under active development, there is also
+        a manual for its unstable features:
+      </p>
+      <a href="https://doc.rust-lang.org/nightly/unstable-book/">The Unstable Book</a>
       <p>
         Additionally, though they do not form an official standard, there are
         also the Rust RFCs:
@@ -71,32 +77,30 @@
       <hr />
 
       <h2>Documentation</h2>
-      <p>These two pages form the official language documentation:</p>
+      <p>The following two pages form the official language documentation:</p>
       <ul>
         <li>
-          <a href="https://doc.rust-lang.org/core/index.html"
-            >Rust Core Library Documentation</a
-          >
+          <a href="https://doc.rust-lang.org/core/index.html">Rust Core Library Documentation</a>
         </li>
         <li>
-          <a href="https://doc.rust-lang.org/std/index.html"
-            >Rust Standard Library Documentation</a
-          >
+          <a href="https://doc.rust-lang.org/std/index.html">Rust Standard Library Documentation</a>
         </li>
       </ul>
+      <p>
+        The core library docs cover everything included by default in the <i>prelude</i>.<br>
+        The standard library docs cover everything included with the language that must explicitly be imported.
+      </p>
       <br />
       <hr />
 
       <h2>Additional Resources</h2>
       <p>
-        The official Rust language website has a page where links to various
+        The official Rust language website also has a page where links to other miscellaneous
         documentation are provided by topic. The links not only cover the
         language, but also things like the package manager, build system,
         documentation generator, etc.
       </p>
-      <a href="https://www.rust-lang.org/learn"
-        >Other Books and Documentation</a
-      >
+      <a href="https://www.rust-lang.org/learn">Other Books and Documentation</a>
     </div>
   </body>
 
