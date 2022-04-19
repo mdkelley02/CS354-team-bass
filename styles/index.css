@@ -96,11 +96,8 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .inline-code {
-  background-color: #191919;
-  color: white;
-  padding: 0 0.25rem;
+  background-color: #171c19;
+  color: #87928a;
+  padding: 0.25rem 0.25rem;
   font-family: monospace;
-}
-.code-snippet {
-  padding: 0;
 }
