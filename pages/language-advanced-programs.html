@@ -91,7 +91,7 @@
       <hr>
 
 
-      <h2>Insertion Sort</h2>
+      <h2>Insertion Sort & Bubble Sort</h2>
       <h4><i>(Author: Brandon Mattaini)</i></h4>
       <p>Concepts:</p>
       <ul>
@@ -100,38 +100,39 @@
       </ul>
       <p>Running this program will output the following:</p>
       <p class="mono">
+        Sort strings alphabetically:<br>
+        Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]<br>
+        After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br><br>
 
-Sort strings alphabetically:<br>
-Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]<br>
-After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br>
-Sort numbers in ascending order:<br>
-Before: [43, 65, 23, 78, 4, -30, 12, 89, 3335, 60]<br>
-After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br>
-
-After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
-        
+        Sort numbers in ascending order:<br>
+        Before: [43, 65, 23, 78, 4, -30, 12, 89, 3335, 60]<br>
+        After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
+        Before: [23, 45, 90, 223, -50, 22, 1, 987]<br>
+        After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
       </p>
       <pre><code class="language-rust">
 
       fn main() {
+         let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
+         let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
+         let mut nums2 = [23,45,90,223,-50,22,1,987];
 
-        println!("Sort strings alphabetically");
-        let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
-        println!("Before: {:?}", strings); 
-        insertion_sort(&mut strings); // calling the insertion sort function
-        println!("After:  {:?}\n", strings);
-        println!("Sort numbers ascending");
-        let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
-        println!("Before: {:?}", nums);  // inserting the entrie array here with {:?}
-        insertion_sort(&mut nums);
-        println!("After:  {:?}\n", nums);
-        let mut nums2 = [23,45,90,223,-50,22,1,987];
-        bubble_sort(&mut nums2);
-        println!("After: {:?}\n", nums2);
-        
+         println!("Sort strings alphabetically");
+         println!("Before: {:?}", strings);
+         insertion_sort(&mut strings); // calling the insertion sort function
+         println!("After:  {:?}\n", strings);
+
+         println!("Sort numbers ascending");
+         println!("Before: {:?}", nums);  // inserting the entrie array here with {:?}
+         insertion_sort(&mut nums);
+         println!("After:  {:?}\n", nums);
+
+         println!("Before: {:?}", nums2);
+         bubble_sort(&mut nums2);
+         println!("After: {:?}\n", nums2);
     }
     
-    fn insertion_sort<T: Ord>(arr: &mut [T]) {
+    fn insertion_sort&ltT: Ord>(arr: &mut [T]) {
         for i in 1..arr.len() {
             let mut k = i;
             while k > 0 && arr[k] < arr[k - 1] {
@@ -141,7 +142,7 @@ After:  [-50, 1, 22, 23, 45, 90, 223, 987]<br><br>
         }
     }
     
-    fn bubble_sort<T: PartialOrd>(input: &mut [T]) {
+    fn bubble_sort&ltT: PartialOrd>(input: &mut [T]) {
         if input.len() < 2 {return;}
         
         let input_len = input.len();
