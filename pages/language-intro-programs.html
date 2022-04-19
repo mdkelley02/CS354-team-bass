@@ -70,8 +70,6 @@
     <div class="container">
       <h1>Introductory Programs</h1>
       <hr>
-
-
       <h2>Build and Run Instructions (For All Programs)</h2>
       <ol>
         <li>Ensure all dependencies for your platform are installed by following these instructions <a href="language-translators.html">here.</a></li>
@@ -90,6 +88,28 @@
       </code></pre>
       <hr>
 
+      <h2>Summing the elements of an array</h2>
+      <h4><i>(Author: Senami Hodonu)</i></h4>
+      <p>Running this program will output the following:</p>
+      <p class="mono">
+        Sum: 30<br>
+      </p>
+      <pre><code class="language-rust">
+      fn seqsum(seq: [u8; 6]) -> u8 {
+          //Returns a u8 integer type.
+          //u8: 8-bit unsigned integer type
+          //The iter() method returns an iterator object of the collection
+          //sum() method sums the elements of an iterator.
+          //Takes each element, adds them together, and returns the result.
+          seq.iter().sum()
+      }
+      fn main() {
+          let seq = [5,6,1,8,3,7];
+          println!("Sum: {}", seqsum(seq));
+      }
+      
+      </code></pre>
+      <hr>
 
       <h2>Fizz Buzz Example with Match Statement</h2>
       <h4><i>(Author: Matthew Kelley)</i></h4>
@@ -107,7 +127,109 @@
       </code></pre>
       <hr>
 
+      <h2>Basic Exception Handling</h2>
+      <h4><i>(Author: Brandon Mattaini)</i></h4>
+      <p>Running this program will output the following:</p>
+      <p class="mono">
+        thread 'main' panicked at 'NOT_AN_EVEN', basicProgram.rs:22:8
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace<br>
+        or<br>
+        Thank you, this number is even<br>
+      </p>
+      <pre><code class="language-rust">
+      use std::env;
+    
+      fn main(){
+          
+         let args:Vec<String> = env::args().collect();
+          
+          let user_num:i32 = match args.len() {
+             2 => {
+                match args[1].parse::<i32>() {
+                   Ok(num) => num,
+                   Err(_) => panic!("You must enter an integer")
+                }
+             },
+             _ => panic!("Please provide an integer")
+          };
+         
+      
+          if user_num%2 == 0 {
+             println!("Correct! This number is even!");
+          } else {
+             panic!("NOT_AN_EVEN"); // panic! macro being used
+          }
+          println!("End of main");
+       }
+            </code></pre>
+      <hr>
 
+      <h2>Basic Struct and Enum</h2>
+      <h4><i>(Author: Taylor Brooks)</i></h4>
+      <p>Running this program will output the following:</p>
+      <p class="mono">
+        Student { name: "Joe", grade: B, age: 20, major: "Mechanical Engineering" } <br>
+        Student { name: "Joe", grade: A, age: 20, major: "Mechanical Engineering" }<br>
+      </p>
+      <pre><code class="language-rust">
+              #[derive(Debug)]
+              enum Grade {
+                  A,
+                  B,
+                  C,
+                  D,
+                  F,
+              }
+      
+              #[derive(Debug)]
+              struct Student {
+                  name: &'static str,
+                  grade: Grade,
+                  age: i32,
+                  major: String
+              }
+      
+              impl Student {
+                  fn changeGrade(&mut self, newGrade: Grade)  {
+                      self.grade = newGrade;
+                  }
+              }
+      
+              fn main() {
+                  let mut student = Student {name: "Joe", grade: Grade::B, age: 20, major: "Mechanical Engineering".to_string()  };
+                  println!("{:?}", student);
+                  student.changeGrade(Grade::A);
+                  println!("{:?}", student);
+              }
+            </code></pre>
+      <hr>
+      <h2>Basic Lambdas and Higher Order Functions</h2>
+      <h4><i>(Author: Cory Tomlinson)</i></h4>
+      <p>Running this program will output the following:</p>
+      <p class="mono">
+        5050<br>
+        3628800<br>
+      </p>
+      <pre><code class="language-rust">
+              use std::ops::{Mul, RangeInclusive};
+      
+              fn sum_range(range:RangeInclusive&lti32>)->i32 {
+                 range.fold(0,|acc,n| acc+n)
+              }
+      
+              fn op_range&ltF>(range:RangeInclusive&lti32>,op:F)->Option&lti32> where F:Fn(i32,i32)->i32 {
+                 range.reduce(|acc,n| op(acc,n))
+              }
+      
+              fn main() {
+                 println!("{}",sum_range(1..=100));
+                 println!("{}",match op_range(1..=10,i32::mul) {
+                    Some(result) => result,
+                    None => panic!("op_range returned an empty value")
+                 });
+              }
+            </code></pre>
+      <hr>
       <h2>Testing Example</h2>
       <h4><i>(Author: Xavier Black)</i></h4>
       <p>Running this program will output the following:</p>
@@ -155,138 +277,6 @@
           }
         }  
       </code></pre>
-      <hr>
-
-
-      <h2>Summing the elements of an array</h2>
-      <h4><i>(Author: Senami Hodonu)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        Sum: 30<br>
-      </p>
-      <pre><code class="language-rust">
-      fn seqsum(seq: [u8; 6]) -> u8 {
-          //Returns a u8 integer type.
-          //u8: 8-bit unsigned integer type
-          //The iter() method returns an iterator object of the collection
-          //sum() method sums the elements of an iterator.
-          //Takes each element, adds them together, and returns the result.
-          seq.iter().sum()
-      }
-      fn main() {
-          let seq = [5,6,1,8,3,7];
-          println!("Sum: {}", seqsum(seq));
-      }
-      
-      </code></pre>
-      <hr>
-
-
-      <h2>Basic Exception Handling</h2>
-      <h4><i>(Author: Brandon Mattaini)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        thread 'main' panicked at 'NOT_AN_EVEN', basicProgram.rs:22:8
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace<br>
-        or<br>
-        Thank you, this number is even<br>
-      </p>
-      <pre><code class="language-rust">
-      use std::env;
-    
-      fn main(){
-          
-         let args:Vec<String> = env::args().collect();
-          
-          let user_num:i32 = match args.len() {
-             2 => {
-                match args[1].parse::<i32>() {
-                   Ok(num) => num,
-                   Err(_) => panic!("You must enter an integer")
-                }
-             },
-             _ => panic!("Please provide an integer")
-          };
-         
-      
-          if user_num%2 == 0 {
-             println!("Correct! This number is even!");
-          } else {
-             panic!("NOT_AN_EVEN"); // panic! macro being used
-          }
-          println!("End of main");
-       }
-            </code></pre>
-      <hr>
-      
-      
-      <h2>Basic Struct and Enum</h2>
-      <h4><i>(Author: Taylor Brooks)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        Student { name: "Joe", grade: B, age: 20, major: "Mechanical Engineering" } <br>
-        Student { name: "Joe", grade: A, age: 20, major: "Mechanical Engineering" }<br>
-      </p>
-      <pre><code class="language-rust">
-              #[derive(Debug)]
-              enum Grade {
-                  A,
-                  B,
-                  C,
-                  D,
-                  F,
-              }
-      
-              #[derive(Debug)]
-              struct Student {
-                  name: &'static str,
-                  grade: Grade,
-                  age: i32,
-                  major: String
-              }
-      
-              impl Student {
-                  fn changeGrade(&mut self, newGrade: Grade)  {
-                      self.grade = newGrade;
-                  }
-              }
-      
-              fn main() {
-                  let mut student = Student {name: "Joe", grade: Grade::B, age: 20, major: "Mechanical Engineering".to_string()  };
-                  println!("{:?}", student);
-                  student.changeGrade(Grade::A);
-                  println!("{:?}", student);
-              }
-            </code></pre>
-      <hr>
-      
-      
-      <h2>Basic Lambdas and Higher Order Functions</h2>
-      <h4><i>(Author: Cory Tomlinson)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        5050<br>
-        3628800<br>
-      </p>
-      <pre><code class="language-rust">
-              use std::ops::{Mul, RangeInclusive};
-      
-              fn sum_range(range:RangeInclusive&lti32>)->i32 {
-                 range.fold(0,|acc,n| acc+n)
-              }
-      
-              fn op_range&ltF>(range:RangeInclusive&lti32>,op:F)->Option&lti32> where F:Fn(i32,i32)->i32 {
-                 range.reduce(|acc,n| op(acc,n))
-              }
-      
-              fn main() {
-                 println!("{}",sum_range(1..=100));
-                 println!("{}",match op_range(1..=10,i32::mul) {
-                    Some(result) => result,
-                    None => panic!("op_range returned an empty value")
-                 });
-              }
-            </code></pre>
       <hr>
       </div>
       </body>

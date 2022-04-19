@@ -89,104 +89,97 @@
         $ ./your_program_name
       </code></pre>
       <hr>
-
-
-      <h2>Linked List</h2>
-      <h4><i>(Author: Taylor Brooks)</i></h4>
-      <p>Running the below program will output the following:</p>
+      <h2>Sorting: Insertion Sort Implementation</h2>
+      <h4><i>(Author: Brandon Mattaini)</i></h4>
+      <p>Running this program will output the following:</p>
       <p class="mono">
-        2 added to list<br>
-        3 added to list<br>
-        3 removed from list.<br>
-        4 added to list<br>
-        head:4,2,1:tail
+Sort strings alphabetically:<br>
+Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]<br>
+After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br>
+Sort numbers in ascending order:<br>
+Before: [43, 65, 23, 78, 4, -30, 12, 89, 3335, 60]<br>
+After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
+        
       </p>
       <pre><code class="language-rust">
-        #[derive(Clone,PartialEq)]
-        struct Node {
-            value: i32,
-            next: Option&#60Box&#60Node>>,
-        }
-
-        impl Node {
-            fn new_node(value: i32) -> Node {
-                Node{value: value, next: None}
-            }
-        }
-
-        #[derive(Clone)]
-        struct List {
-            head: Option&#60Box&#60Node>>,
-        }
-
-        impl List {
-            fn new_list() -> List {
-                List{head: None}
-            }
-
-            fn put_on_head(&mut self, value: i32) {
-                let mut new_node: Box&#60Node> = Box::new(Node::new_node(value));
-                match self.head {
-                    Some(ref _node) => {
-                        new_node.next = self.head.clone();
-                        self.head = Some(new_node);
-                    }
-                    None => {
-                        self.head = Some(new_node);
-                        return;
-                    }
-                }
-                println!("{} added to list", value);
-            }
-
-            fn get_from_head(&mut self) -> i32 {
-                match self.head {
-                    Some(ref node) => {
-                        let temp_node = node.clone();
-                        self.head = node.next.clone();
-                        return temp_node.value;
-                    }
-                    None => {
-                        panic!("Cannot get from empty list!");
-
-                    }
-                }
-            }
-
-            fn print_list(self) {
-                match self.head {
-                    Some(ref node) => {
-                        print!("head:{}", node.value);
-                        let mut temp_node = node;
-                        while temp_node.next != None {
-                            match temp_node.next {
-                                Some(ref next) => {
-                                    print!(",{}", next.value);
-                                    temp_node = next;
-                                }
-                                None => {}
-                            }
-                        }
-                        println!(":tail");
-                    },
-                    None => {println!("Empty List!")}
-                }
-            }
-        }
-
         fn main() {
-            let mut list = List::new_list();
-            list.put_on_head(1);
-            list.put_on_head(2);
-            list.put_on_head(3);
-            println!("{} removed from list.", list.get_from_head());
-            list.put_on_head(4);
-            list.print_list();
-        }
+
+          println!("Sort strings alphabetically");
+          let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
+          println!("Before: {:?}", strings); 
+          insertion_sort(&mut strings); // calling the insertion sort function
+          println!("After:  {:?}\n", strings);
+          println!("Sort numbers ascending");
+          let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
+          println!("Before: {:?}", nums);  // inserting the entrie array here with {:?}
+          insertion_sort(&mut nums);
+          println!("After:  {:?}\n", nums);
+          
+      }
+      
+      fn insertion_sort<T: Ord>(arr: &mut [T]) {
+          for i in 1..arr.len() {
+              let mut k = i;
+              while k > 0 && arr[k] < arr[k - 1] {
+                  arr.swap(k, k - 1);
+                  k = k - 1;
+              }
+          }
+      }
+      
+      
       </code></pre>
       <hr>
-
-
+      <h2>Sorting: Mergesort Implementation</h2>
+      <h4><i>(Author: Matthew Kelley)</i></h4>
+      <p>Running this program will output the following:</p>
+      <p class="mono">
+        <span>1, 2, 3, 4, 5, 6</span>
+      </p>
+      <pre><code class="language-rust">
+      fn mergesort(arr: &mut [i32]) {
+          if arr.len() > 1 {
+              let mid = arr.len() / 2;
+              let (left, right) = arr.split_at_mut(mid);
+              mergesort(left);
+              mergesort(right);
+              merge(left, right, arr);
+          }
+      }
+      
+      fn merge(left: &mut [i32], right: &mut [i32], arr: &mut [i32]) {
+          let mut i = 0;
+          let mut j = 0;
+          let mut k = 0;
+          while i < left.len() && j < right.len() {
+              if left[i] <= right[j] {
+                  arr[k] = left[i];
+                  i += 1;
+              } else {
+                  arr[k] = right[j];
+                  j += 1;
+              }
+              k += 1;
+          }
+          while i < left.len() {
+              arr[k] = left[i];
+              i += 1;
+              k += 1;
+          }
+          while j < right.len() {
+              arr[k] = right[j];
+              j += 1;
+              k += 1;
+          }
+      }
+      
+      fn main() {
+          let mut arr = [1, 5, 6, 3, 2, 4];
+          mergesort(&mut arr);
+          println!("{:?}", arr);
+      }
+      </code></pre>
+      <hr>
       <h2>Bank (from la2)</h2>
       <h4><i>(Author: Cory Tomlinson)</i></h4>
       <p>Running this program will output the following:</p>
@@ -299,7 +292,100 @@
         }
       </code></pre>
       <hr>
+      <h2>Linked List</h2>
+      <h4><i>(Author: Taylor Brooks)</i></h4>
+      <p>Running the below program will output the following:</p>
+      <p class="mono">
+        2 added to list<br>
+        3 added to list<br>
+        3 removed from list.<br>
+        4 added to list<br>
+        head:4,2,1:tail
+      </p>
+      <pre><code class="language-rust">
+        #[derive(Clone,PartialEq)]
+        struct Node {
+            value: i32,
+            next: Option&#60Box&#60Node>>,
+        }
 
+        impl Node {
+            fn new_node(value: i32) -> Node {
+                Node{value: value, next: None}
+            }
+        }
+
+        #[derive(Clone)]
+        struct List {
+            head: Option&#60Box&#60Node>>,
+        }
+
+        impl List {
+            fn new_list() -> List {
+                List{head: None}
+            }
+
+            fn put_on_head(&mut self, value: i32) {
+                let mut new_node: Box&#60Node> = Box::new(Node::new_node(value));
+                match self.head {
+                    Some(ref _node) => {
+                        new_node.next = self.head.clone();
+                        self.head = Some(new_node);
+                    }
+                    None => {
+                        self.head = Some(new_node);
+                        return;
+                    }
+                }
+                println!("{} added to list", value);
+            }
+
+            fn get_from_head(&mut self) -> i32 {
+                match self.head {
+                    Some(ref node) => {
+                        let temp_node = node.clone();
+                        self.head = node.next.clone();
+                        return temp_node.value;
+                    }
+                    None => {
+                        panic!("Cannot get from empty list!");
+
+                    }
+                }
+            }
+
+            fn print_list(self) {
+                match self.head {
+                    Some(ref node) => {
+                        print!("head:{}", node.value);
+                        let mut temp_node = node;
+                        while temp_node.next != None {
+                            match temp_node.next {
+                                Some(ref next) => {
+                                    print!(",{}", next.value);
+                                    temp_node = next;
+                                }
+                                None => {}
+                            }
+                        }
+                        println!(":tail");
+                    },
+                    None => {println!("Empty List!")}
+                }
+            }
+        }
+
+        fn main() {
+            let mut list = List::new_list();
+            list.put_on_head(1);
+            list.put_on_head(2);
+            list.put_on_head(3);
+            println!("{} removed from list.", list.get_from_head());
+            list.put_on_head(4);
+            list.print_list();
+        }
+      </code></pre>
+      <hr>
 
       <h2>File Management: Read/Write/Regex</h2>
       <h4><i>(Author: Senami Hodonu)</i></h4>
@@ -415,102 +501,6 @@
         }
       </code></pre>
       <hr>
-
-
-      <h2>Sorting: Mergesort Implementation</h2>
-      <h4><i>(Author: Matthew Kelley)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-        <span>1, 2, 3, 4, 5, 6</span>
-      </p>
-      <pre><code class="language-rust">
-      fn mergesort(arr: &mut [i32]) {
-          if arr.len() > 1 {
-              let mid = arr.len() / 2;
-              let (left, right) = arr.split_at_mut(mid);
-              mergesort(left);
-              mergesort(right);
-              merge(left, right, arr);
-          }
-      }
-      
-      fn merge(left: &mut [i32], right: &mut [i32], arr: &mut [i32]) {
-          let mut i = 0;
-          let mut j = 0;
-          let mut k = 0;
-          while i < left.len() && j < right.len() {
-              if left[i] <= right[j] {
-                  arr[k] = left[i];
-                  i += 1;
-              } else {
-                  arr[k] = right[j];
-                  j += 1;
-              }
-              k += 1;
-          }
-          while i < left.len() {
-              arr[k] = left[i];
-              i += 1;
-              k += 1;
-          }
-          while j < right.len() {
-              arr[k] = right[j];
-              j += 1;
-              k += 1;
-          }
-      }
-      
-      fn main() {
-          let mut arr = [1, 5, 6, 3, 2, 4];
-          mergesort(&mut arr);
-          println!("{:?}", arr);
-      }
-      </code></pre>
-      <hr>
-
-
-      <h2>Sorting: Insertion Sort Implementation</h2>
-      <h4><i>(Author: Brandon Mattaini)</i></h4>
-      <p>Running this program will output the following:</p>
-      <p class="mono">
-Sort strings alphabetically:<br>
-Before: ["bronco", "cs", "apple", "microsoft", "rust", "java"]<br>
-After:  ["apple", "bronco", "cs", "java", "microsoft", "rust"]<br>
-Sort numbers in ascending order:<br>
-Before: [43, 65, 23, 78, 4, -30, 12, 89, 3335, 60]<br>
-After:  [-30, 4, 12, 23, 43, 60, 65, 78, 89, 3335]<br><br>
-        
-      </p>
-      <pre><code class="language-rust">
-        fn main() {
-
-          println!("Sort strings alphabetically");
-          let mut strings = ["bronco", "cs", "apple", "microsoft", "rust", "java"];
-          println!("Before: {:?}", strings); 
-          insertion_sort(&mut strings); // calling the insertion sort function
-          println!("After:  {:?}\n", strings);
-          println!("Sort numbers ascending");
-          let mut nums = [43,65,23,78,4,-30,12,89,3335,60];
-          println!("Before: {:?}", nums);  // inserting the entrie array here with {:?}
-          insertion_sort(&mut nums);
-          println!("After:  {:?}\n", nums);
-          
-      }
-      
-      fn insertion_sort<T: Ord>(arr: &mut [T]) {
-          for i in 1..arr.len() {
-              let mut k = i;
-              while k > 0 && arr[k] < arr[k - 1] {
-                  arr.swap(k, k - 1);
-                  k = k - 1;
-              }
-          }
-      }
-      
-      
-      </code></pre>
-      <hr>
-
 
       <h2>Macro TT Muncher Parser</h2>
       <h4><i>(Author: Xavier Black)</i></h4>
